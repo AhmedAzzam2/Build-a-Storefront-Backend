@@ -1,27 +1,49 @@
 import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser'
-import {BookStore,Book} from './models/book'
+import cors from 'cors'
+import {BookSouq,Book} from './models/book'
+import Pool from './database'
+// import booksRoute from '../routes/books'
 
 const app: express.Application = express()
 const address: string = "0.0.0.0:3000"
 
-app.use(bodyParser.json())
+
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Cors for cross origin allowance
+app.use(cors());
+
+// Initialize the main project folder
+app.use(express.static('website'));
 
 
-const book = new BookStore()
-type fr = {
-     id: number;
-     title: string;
-     author: string;
-     totalPages: number;
-     summary: string;
-}
-let hui = fr
-app.get('/', function (req: Request, res: Response) {
+import client from './database'
+import Book_routes from './routes/books'
 
-    book.create('Hello','hu',41,'ygi')
-    res.send('Hello World!')
-})
+let bk =new BookSouq()
+
+client.connect().then(
+    (db)=>{
+        return db.query('SELECT from books', (err, res) => {
+          console.log(err, res.rows) 
+        })
+        
+    }
+)
+
+
+
+// app.post('/', function (req: Request, res: Response) {
+//     bk.create(req.body) 
+//     res.json( {data:req.body} )
+// })
+
+ 
+
+Book_routes(app);
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`)

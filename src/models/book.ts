@@ -9,7 +9,7 @@ export type Book = {
      summary: string;
 }
 
-export class BookStore {
+export class BookSouq {
   async index(): Promise<Book[]> {
     try {
       // @ts-ignore
@@ -57,7 +57,7 @@ export class BookStore {
 
     return book
       } catch (err) {
-          throw new Error(`Could not add new book ${title}. Error: ${err}`)
+          throw new Error(`Could not add new book . Error: ${err}`)
       }
   }
 
