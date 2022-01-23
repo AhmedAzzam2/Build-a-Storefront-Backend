@@ -10,7 +10,7 @@ document.getElementById('generate').addEventListener('click', (e) => {
     }
 
     const newLocal = document.localhost = '#footer';
-    return fetch('http://localhost:3000/books/up', {
+    return fetch('http://localhost:3000/books', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -154,6 +154,133 @@ function deletBook(id) {
 
 
 
+
+// user start 
+document.getElementById('generateUser').addEventListener('click', (e) => {
+
+    e.preventDefault();
+    let data = {
+        "id": document.getElementById('id').value,
+        "firstName": document.getElementById('firstName').value,
+        "lastName": document.getElementById('lastName').value,
+        "email": document.getElementById('email').value,
+        "phone": document.getElementById('phone').value,
+        "password": document.getElementById('password').value
+    }
+
+    // const newLocal = document.localhost = '#footer';
+    return fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json()).then(data =>
+            document.getElementById('card').innerHTML +=
+            `<tr id="user${data.id}" class="alert alert-success">
+                    <th scope="row">${data.id}</th>
+                    <td>${data.firstname}</td>
+                    <td>${data.lastname}</td>
+                    <td>${data.email}</td>
+                    <td>${data.phone}</td>
+                    <td class="btn btn-danger" onclick="deletUser( ${data.id} )">del</td>
+                </tr>`,
+                console.log(data)
+        ).then(   
+            // window.location = '#footer'
+        )
+
+});
+
+ 
+
+let ULuser = async () => {
+    let res = await fetch(`http://localhost:3000/users`);
+    try {
+        res.json().then(mydata => {
+            console.log(mydata)
+            let data
+            for (const key in mydata) { console.log(mydata);
+                data += `
+                <tr id="user${mydata[key].id}">
+                    <th scope="row">${mydata[key].id}</th>
+                    <td>${mydata[key].firstname}</td>
+                    <td>${mydata[key].lastname}</td>
+                    <td>${mydata[key].email}</td>
+                    <td>${mydata[key].phone}</td>
+                    
+    <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showUser( ${mydata[key].id} )"
+    data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].firstName}" data-bs-whatever3="${mydata[key].email}" data-bs-whatever4="${mydata[key].lastName}"  data-bs-whatever5="${mydata[key].phone}">Open</button></td>
+
+                    <td class="btn bg-danger p-1" onclick="deletUser( ${mydata[key].id} )">delete</td>
+              </tr> 
+            `;
+            }
+            document.getElementById('carduser').innerHTML = data
+        })
+    } catch (error) {
+        catchErr(error);
+    }
+}
+
+ULuser()
+
+
+
+/// edit
+// function showUser(id) {
+//     const formData = new FormData();
+//     formData.append('id', id);
+
+//     return fetch(`http://localhost:3000/users/${id}`, { 
+//     }).then(data => console.log(data.json())
+
+//         )
+// }
+
+
+let showUser = async (id) => {
+    let res = await fetch(`http://localhost:3000/users/${id}`);
+    try {
+        res.json().then(mydata => { 
+            let data
+            data += `
+            <div id="user${mydata.id}">
+                <div scope="row">${mydata.id}</div>
+                <div>${mydata.firstName}</div>
+                <div>${mydata.lastName}</div>
+                <div>${mydata.email}</div>
+                <div>${mydata.phone}</div>
+          </div`;
+            document.getElementById('formElem2').innerHTML = data
+        })
+    } catch (error) {
+        catchErr(error);
+    }
+}
+
+
+/// delet
+function deletUser(id) {
+    const formData = new FormData();
+    formData.append('id', id);
+
+    return fetch('http://localhost:3000/users', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "id": id }),
+        // body: {"id":id}
+    }).then(
+        document.querySelector(`#user${id}`).remove()
+    )
+        .then(
+            document.getElementById('alert').innerHTML += `<div  class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>done delete it </strong>  
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>`
+        )
+}
+
+// user end
 
 // var exampleModal = document.getElementById('exampleModal')
 // exampleModal.addEventListener('show.bs.modal', function (event) {

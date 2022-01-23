@@ -8,6 +8,7 @@ const onen = new BookSouq();
 const index = async (_req: Request, res: Response) => {
   try{
    const Books = await onen.index();
+   
     res.json(Books);
 } catch (err) {
  res.status(400);  
@@ -29,6 +30,8 @@ const create = async (req: Request, res: Response) => {
             totalPages: req.body.totalPages,
             summary:req.body.summary,
         };
+        console.log(req.body);
+        
         const newBook = await onen.create(Book0);
         res.json(newBook)
         console.log(newBook)
@@ -38,6 +41,28 @@ const create = async (req: Request, res: Response) => {
         res.json(err);
     }
 };
+
+const update = async (req: Request, res: Response) => {
+    try {
+        const Book0: Book = {
+            id:  req.body.id,
+            title:  req.body.title,
+            author: req.body.author,
+            totalPages: req.body.totalPages,
+            summary:req.body.summary,
+        };
+        console.log(req.body);
+        
+        const newBook = await onen.updateBook(Book0);
+        res.json(newBook)
+        console.log(newBook)
+    } catch(err) {
+        console.log(err)
+        res.status(400);
+        res.json(err);
+    }
+};
+
 
 const delBook = async (req: Request, res: Response) => {
     const deleted = await onen.delete(req.body.id)
@@ -55,6 +80,7 @@ const Book_routes = (app: express.Application) => {
   app.get('/Books', index);
   app.get('/Books/:id', show);
   app.post('/Books', create);
+  app.patch('/Books', update);
   app.delete('/Books', delBook);
 };
 export default Book_routes;

@@ -1,6 +1,9 @@
 import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import client from './database'
+import User_routes from './routes/User'
+import Book_routes from './routes/books'
 import {BookSouq,Book} from './models/book'
 import Pool from './database'
 // import booksRoute from '../routes/books'
@@ -20,8 +23,6 @@ app.use(cors());
 app.use(express.static('website'));
 
 
-import client from './database'
-import Book_routes from './routes/books'
 
 let bk =new BookSouq()
 
@@ -44,6 +45,7 @@ client.connect().then(
  
 
 Book_routes(app);
+User_routes(app);
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`)

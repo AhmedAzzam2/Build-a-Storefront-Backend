@@ -39,13 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.BookStore = void 0;
+exports.BookSouq = void 0;
 // @ts-ignore
 var database_1 = __importDefault(require("../database"));
-var BookStore = /** @class */ (function () {
-    function BookStore() {
+var BookSouq = /** @class */ (function () {
+    function BookSouq() {
     }
-    BookStore.prototype.index = function () {
+    BookSouq.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_1;
             return __generator(this, function (_a) {
@@ -69,7 +69,7 @@ var BookStore = /** @class */ (function () {
             });
         });
     };
-    BookStore.prototype.show = function (id) {
+    BookSouq.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, err_2;
             return __generator(this, function (_a) {
@@ -93,7 +93,7 @@ var BookStore = /** @class */ (function () {
             });
         });
     };
-    BookStore.prototype.create = function (b) {
+    BookSouq.prototype.create = function (b) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, book, err_3;
             return __generator(this, function (_a) {
@@ -113,13 +113,13 @@ var BookStore = /** @class */ (function () {
                         return [2 /*return*/, book];
                     case 3:
                         err_3 = _a.sent();
-                        throw new Error("Could not add new book ".concat(title, ". Error: ").concat(err_3));
+                        throw new Error("Could not add new book . Error: ".concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    BookStore.prototype["delete"] = function (id) {
+    BookSouq.prototype["delete"] = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, book, err_4;
             return __generator(this, function (_a) {
@@ -144,6 +144,6 @@ var BookStore = /** @class */ (function () {
             });
         });
     };
-    return BookStore;
+    return BookSouq;
 }());
-exports.BookStore = BookStore;
+exports.BookSouq = BookSouq;

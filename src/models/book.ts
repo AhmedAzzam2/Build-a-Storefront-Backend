@@ -61,6 +61,31 @@ export class BookSouq {
       }
   }
 
+
+  async updateBook(b: Book): Promise<Book> {
+    try {
+      
+      const sql = `UPDATE books 
+                  SET title=$1, author=$2, total_pages=$3, summary=$4 
+                  WHERE id=$5 
+                  RETURNING *`
+
+  // @ts-ignore
+  const conn = await Client.connect()
+
+  const result = await conn
+      .query(sql, [b.title, b.author, b.totalPages, b.summary,b.id])
+
+  const book = result.rows[0]
+
+  conn.release()
+
+  return book
+    } catch (err) {
+        throw new Error(`Could not add new book . Error: ${err}`)
+    }
+}
+
   async delete(id: string): Promise<Book> {
       try {
     const sql = 'DELETE FROM books WHERE id=($1)'
