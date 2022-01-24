@@ -79,6 +79,14 @@ let UL = async () => {
                     <td>${mydata[key].author}</td>
                     <td>${mydata[key].total_pages}</td>
                     <td>${mydata[key].summary}</td>
+    <td class="row"> <div style="background-color: #ffd814;" class="btn p-1 col" onclick="addcard( ${mydata[key].id} )">order </div>
+    <select class="form-select col" id="quantity${mydata[key].id}">
+        <option selected>1</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    </td>
                     
     <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showBook( ${mydata[key].id} )"
     data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].title}" data-bs-whatever3="${mydata[key].author}" data-bs-whatever4="${mydata[key].total_pages}"  data-bs-whatever5="${mydata[key].summary}">Open</button></td>
@@ -380,6 +388,27 @@ let showOrder = async (id) => {
     } catch (error) {
         catchErr(error);
     }
+}
+
+
+function addcard(id) { 
+ 
+    return fetch('http://localhost:3000/Orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(   { 
+            "quantity":  document.querySelector("#quantity"+id).value, 
+            "books_id": id,
+            "status": "active;"
+       }),
+        // body: {"id":id}
+    })
+     .then(
+            document.getElementById('alert').innerHTML += `<div  class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>done add it </strong>  
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>`
+        )
 }
 
 
