@@ -4,7 +4,9 @@ import cors from 'cors'
 import client from './database'
 import User_routes from './routes/User'
 import Book_routes from './routes/books'
+import Order_routes from './routes/order'
 import {BookSouq,Book} from './models/book'
+import {OrderSouq,Order} from './models/order'
 import Pool from './database'
 // import booksRoute from '../routes/books'
 
@@ -46,6 +48,7 @@ client.connect().then(
 
 Book_routes(app);
 User_routes(app);
+Order_routes(app);
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`)

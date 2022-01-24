@@ -1,1 +1,15 @@
+ *,body{
+     background-color: #1f1d1f;
+     color: #fff;
+ }
  
+ .form-control {
+    background-color: #121113;
+    color: rgb(255, 245, 255);
+    border: none;
+}
+.form-control:focus {
+    transform: scale(1.1);
+    background-color: #000000;
+    color: #ffd;
+}

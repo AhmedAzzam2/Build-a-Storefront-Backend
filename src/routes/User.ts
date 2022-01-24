@@ -1,8 +1,6 @@
 import express, { Request, Response } from 'express';
 import { UserSouq,User } from '../models/user'; 
-// import verifyAuthToken from '../middleware/verifyauthtoken';
-
-
+let bcrypt = require('bcrypt')
 const onen = new UserSouq();
 
 const index = async (_req: Request, res: Response) => {
@@ -15,21 +13,21 @@ const index = async (_req: Request, res: Response) => {
  res.json(err);
   }
 }
-
+ 
 const show = async (req: Request, res: Response) => {
     const User = await onen.show(req.params.id);
     res.json(User)
 }
-
 const create = async (req: Request, res: Response) => {
     try {
+        const hash = bcrypt.hashSync( req.body.password + 'pepper', parseInt('10') );
         const User0: User = {
             id:  req.body.id,
             firstName:  req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
             phone:req.body.phone,
-            password:req.body.password,
+            password:hash,
         };
         console.log(req.body);
         

@@ -39,13 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookSouq = void 0;
+exports.UserSouq = void 0;
 // @ts-ignore
 var database_1 = __importDefault(require("../database"));
-var BookSouq = /** @class */ (function () {
-    function BookSouq() {
+var UserSouq = /** @class */ (function () {
+    function UserSouq() {
     }
-    BookSouq.prototype.index = function () {
+    UserSouq.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_1;
             return __generator(this, function (_a) {
@@ -55,7 +55,7 @@ var BookSouq = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM books';
+                        sql = 'SELECT * FROM users';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
@@ -63,20 +63,20 @@ var BookSouq = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_1 = _a.sent();
-                        throw new Error("Could not get books. Error: ".concat(err_1));
+                        throw new Error("Could not get users. Error: ".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    BookSouq.prototype.show = function (id) {
+    UserSouq.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        sql = 'SELECT * FROM books WHERE id=($1)';
+                        sql = 'SELECT * FROM users WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
@@ -87,89 +87,89 @@ var BookSouq = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         err_2 = _a.sent();
-                        throw new Error("Could not find book ".concat(id, ". Error: ").concat(err_2));
+                        throw new Error("Could not find user ".concat(id, ". Error: ").concat(err_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    BookSouq.prototype.create = function (b) {
+    UserSouq.prototype.create = function (b) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, book, err_3;
+            var sql, conn, result, user, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        sql = 'INSERT INTO books (title, author, total_pages, summary) VALUES($1, $2, $3, $4) RETURNING *';
+                        sql = 'INSERT INTO users (firstName, lastName, email,phone, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [b.title, b.author, b.totalPages, b.summary])];
+                                .query(sql, [b.firstName, b.lastName, b.email, b.phone, b.password])];
                     case 2:
                         result = _a.sent();
-                        book = result.rows[0];
+                        user = result.rows[0];
                         conn.release();
-                        return [2 /*return*/, book];
+                        return [2 /*return*/, user];
                     case 3:
                         err_3 = _a.sent();
-                        throw new Error("Could not add new book . Error: ".concat(err_3));
+                        throw new Error("Could not add new user . Error: ".concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    BookSouq.prototype.updateBook = function (b) {
+    UserSouq.prototype.updateUser = function (b) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, book, err_4;
+            var sql, conn, result, user, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        sql = "UPDATE books \n                  SET title=$1, author=$2, total_pages=$3, summary=$4 \n                  WHERE id=$5 \n                  RETURNING *";
+                        sql = "UPDATE users \n                  SET firstName=$1, lastName=$2, email=$3,phone=$4, password=$5 \n                  WHERE id=$6 \n                  RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [b.title, b.author, b.totalPages, b.summary, b.id])];
+                                .query(sql, [b.firstName, b.lastName, b.email, b.phone, b.password, b.id])];
                     case 2:
                         result = _a.sent();
-                        book = result.rows[0];
+                        user = result.rows[0];
                         conn.release();
-                        return [2 /*return*/, book];
+                        return [2 /*return*/, user];
                     case 3:
                         err_4 = _a.sent();
-                        throw new Error("Could not add new book . Error: ".concat(err_4));
+                        throw new Error("Could not add new user . Error: ".concat(err_4));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    BookSouq.prototype.delete = function (id) {
+    UserSouq.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, book, err_5;
+            var sql, conn, result, user, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        sql = 'DELETE FROM books WHERE id=($1)';
+                        sql = 'DELETE FROM users WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
-                        book = result.rows[0];
+                        user = result.rows[0];
                         conn.release();
-                        return [2 /*return*/, book];
+                        return [2 /*return*/, user];
                     case 3:
                         err_5 = _a.sent();
-                        throw new Error("Could not delete book ".concat(id, ". Error: ").concat(err_5));
+                        throw new Error("Could not delete user ".concat(id, ". Error: ").concat(err_5));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    return BookSouq;
+    return UserSouq;
 }());
-exports.BookSouq = BookSouq;
+exports.UserSouq = UserSouq;

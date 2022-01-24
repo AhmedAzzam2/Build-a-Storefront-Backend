@@ -36,19 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var book_1 = require("../models/book");
+var user_1 = require("../models/user");
 // import verifyAuthToken from '../middleware/verifyauthtoken';
-var onen = new book_1.BookSouq();
+var onen = new user_1.UserSouq();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Books, err_1;
+    var Users, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, onen.index()];
             case 1:
-                Books = _a.sent();
-                res.json(Books);
+                Users = _a.sent();
+                res.json(Users);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -60,36 +60,37 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Book;
+    var User;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, onen.show(req.params.id)];
             case 1:
-                Book = _a.sent();
-                res.json(Book);
+                User = _a.sent();
+                res.json(User);
                 return [2 /*return*/];
         }
     });
 }); };
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Book0, newBook, err_2;
+    var User0, newUser, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                Book0 = {
+                User0 = {
                     id: req.body.id,
-                    title: req.body.title,
-                    author: req.body.author,
-                    totalPages: req.body.totalPages,
-                    summary: req.body.summary,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    password: req.body.password,
                 };
                 console.log(req.body);
-                return [4 /*yield*/, onen.create(Book0)];
+                return [4 /*yield*/, onen.create(User0)];
             case 1:
-                newBook = _a.sent();
-                res.json(newBook);
-                console.log(newBook);
+                newUser = _a.sent();
+                res.json(newUser);
+                console.log(newUser);
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
@@ -102,24 +103,25 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Book0, newBook, err_3;
+    var User0, newUser, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                Book0 = {
+                User0 = {
                     id: req.body.id,
-                    title: req.body.title,
-                    author: req.body.author,
-                    totalPages: req.body.totalPages,
-                    summary: req.body.summary,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    password: req.body.password,
                 };
                 console.log(req.body);
-                return [4 /*yield*/, onen.updateBook(Book0)];
+                return [4 /*yield*/, onen.updateUser(User0)];
             case 1:
-                newBook = _a.sent();
-                res.json(newBook);
-                console.log(newBook);
+                newUser = _a.sent();
+                res.json(newUser);
+                console.log(newUser);
                 return [3 /*break*/, 3];
             case 2:
                 err_3 = _a.sent();
@@ -131,7 +133,7 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-var delBook = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var delUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var deleted;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -143,17 +145,17 @@ var delBook = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); };
-// const Book_routes = (app: express.Application) => {
-//     app.get('/Books', index);
-//     app.get('/Books/:id', show);
-//     app.post('/Books', verifyAuthToken, create);
-//     app.delete('/Books', verifyAuthToken, delBook);
+// const User_routes = (app: express.Application) => {
+//     app.get('/Users', index);
+//     app.get('/Users/:id', show);
+//     app.post('/Users', verifyAuthToken, create);
+//     app.delete('/Users', verifyAuthToken, delUser);
 // };
-var Book_routes = function (app) {
-    app.get('/Books', index);
-    app.get('/Books/:id', show);
-    app.post('/Books', create);
-    app.patch('/Books', update);
-    app.delete('/Books', delBook);
+var User_routes = function (app) {
+    app.get('/Users', index);
+    app.get('/Users/:id', show);
+    app.post('/Users', create);
+    app.patch('/Users', update);
+    app.delete('/Users', delUser);
 };
-exports.default = Book_routes;
+exports.default = User_routes;

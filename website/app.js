@@ -175,7 +175,7 @@ document.getElementById('generateUser').addEventListener('click', (e) => {
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
-            document.getElementById('card').innerHTML +=
+            document.getElementById('carduser').innerHTML +=
             `<tr id="user${data.id}" class="alert alert-success">
                     <th scope="row">${data.id}</th>
                     <td>${data.firstname}</td>
@@ -184,9 +184,7 @@ document.getElementById('generateUser').addEventListener('click', (e) => {
                     <td>${data.phone}</td>
                     <td class="btn btn-danger" onclick="deletUser( ${data.id} )">del</td>
                 </tr>`,
-                console.log(data)
-        ).then(   
-            // window.location = '#footer'
+                window.location = '#footer'
         )
 
 });
@@ -199,7 +197,7 @@ let ULuser = async () => {
         res.json().then(mydata => {
             console.log(mydata)
             let data
-            for (const key in mydata) { console.log(mydata);
+            for (const key in mydata) { 
                 data += `
                 <tr id="user${mydata[key].id}">
                     <th scope="row">${mydata[key].id}</th>
@@ -209,7 +207,7 @@ let ULuser = async () => {
                     <td>${mydata[key].phone}</td>
                     
     <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showUser( ${mydata[key].id} )"
-    data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].firstName}" data-bs-whatever3="${mydata[key].email}" data-bs-whatever4="${mydata[key].lastName}"  data-bs-whatever5="${mydata[key].phone}">Open</button></td>
+    data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].firstname}" data-bs-whatever3="${mydata[key].email}" data-bs-whatever4="${mydata[key].lastname}"  data-bs-whatever5="${mydata[key].phone}">Open</button></td>
 
                     <td class="btn bg-danger p-1" onclick="deletUser( ${mydata[key].id} )">delete</td>
               </tr> 
@@ -281,6 +279,132 @@ function deletUser(id) {
 }
 
 // user end
+
+
+
+// order start 
+document.getElementById('generateOrder').addEventListener('click', (e) => {
+
+    e.preventDefault();
+    let data = {
+        "id": document.getElementById('id').value,
+        "quantity": document.getElementById('quantity').value,
+        "order_id": document.getElementById('order_id').value,
+        "books_id": document.getElementById('books_id').value,
+        "status": document.getElementById('status').value,
+    }
+
+    // const newLocal = document.localhost = '#footer';
+    return fetch('http://localhost:3000/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json()).then(data =>
+            document.getElementById('cardorder').innerHTML +=
+            `<tr id="order${data.id}" class="alert alert-success">
+                    <th scope="row">${data.id}</th>
+                    <td>${data.quantity}</td>
+                    <td>${data.order_id}</td>
+                    <td>${data.books_id}</td>
+                    <td>${data.status}</td>
+                    <td class="btn btn-danger" onclick="deletOrder( ${data.id} )">del</td>
+                </tr>`,
+                window.location = '#footer'
+        )
+
+});
+
+ 
+
+let ULorder = async () => {
+    let res = await fetch(`http://localhost:3000/orders`);
+    try {
+        res.json().then(mydata => {
+            console.log(mydata)
+            let data
+            for (const key in mydata) { 
+                data += `
+                <tr id="order${mydata[key].id}">
+                    <th scope="row">${mydata[key].id}</th>
+                    <td>${mydata[key].quantity}</td>
+                    <td>${mydata[key].order_id}</td>
+                    <td>${mydata[key].books_id}</td>
+                    <td>${mydata[key].status}</td>
+                    
+    <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showOrder( ${mydata[key].id} )"
+    data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].quantity}" data-bs-whatever3="${mydata[key].books_id}" data-bs-whatever4="${mydata[key].order_id}"  data-bs-whatever5="${mydata[key].status}">Open</button></td>
+
+                    <td class="btn bg-danger p-1" onclick="deletOrder( ${mydata[key].id} )">delete</td>
+              </tr> 
+            `;
+            }
+            document.getElementById('cardorder').innerHTML = data
+        })
+    } catch (error) {
+        catchErr(error);
+    }
+}
+
+ULorder()
+
+
+
+/// edit
+// function showOrder(id) {
+//     const formData = new FormData();
+//     formData.append('id', id);
+
+//     return fetch(`http://localhost:3000/orders/${id}`, { 
+//     }).then(data => console.log(data.json())
+
+//         )
+// }
+
+
+let showOrder = async (id) => {
+    let res = await fetch(`http://localhost:3000/orders/${id}`);
+    try {
+        res.json().then(mydata => { 
+            let data
+            data += `
+            <div id="order${mydata.id}">
+                <div scope="row">${mydata.id}</div>
+                <div>${mydata.quantity}</div>
+                <div>${mydata.order_id}</div>
+                <div>${mydata.books_id}</div>
+                <div>${mydata.status}</div>
+          </div`;
+            document.getElementById('formElem2').innerHTML = data
+        })
+    } catch (error) {
+        catchErr(error);
+    }
+}
+
+
+/// delet
+function deletOrder(id) {
+    const formData = new FormData();
+    formData.append('id', id);
+
+    return fetch('http://localhost:3000/orders', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "id": id }),
+        // body: {"id":id}
+    }).then(
+        document.querySelector(`#order${id}`).remove()
+    )
+        .then(
+            document.getElementById('alert').innerHTML += `<div  class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>done delete it </strong>  
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>`
+        )
+}
+
+// order end
 
 // var exampleModal = document.getElementById('exampleModal')
 // exampleModal.addEventListener('show.bs.modal', function (event) {
