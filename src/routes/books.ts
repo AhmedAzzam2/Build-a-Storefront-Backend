@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { BookSouq,Book } from '../models/book'; 
+import authenticateToken from './auth';
 // import verifyAuthToken from '../middleware/verifyauthtoken';
 
 
@@ -77,10 +78,10 @@ const delBook = async (req: Request, res: Response) => {
 // };
 
 const Book_routes = (app: express.Application) => {
-  app.get('/Books', index);
-  app.get('/Books/:id', show);
-  app.post('/Books', create);
-  app.patch('/Books', update);
-  app.delete('/Books', delBook);
+  app.get('/Books',authenticateToken, index);
+  app.get('/Books/:id',authenticateToken, show);
+  app.post('/Books',authenticateToken, create);
+  app.patch('/Books',authenticateToken, update);
+  app.delete('/Books',authenticateToken, delBook);
 };
 export default Book_routes;

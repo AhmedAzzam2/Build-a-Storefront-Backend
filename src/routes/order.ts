@@ -1,6 +1,15 @@
 import express, { Request, Response } from 'express';
 import { OrderSouq,Order } from '../models/order'; 
+import authenticateToken from './auth';
 let bcrypt = require('bcrypt')
+const dotenv = require('dotenv');
+
+// get config vars
+dotenv.config();
+
+// access config var 
+import jwt from 'jsonwebtoken'
+
 const onen = new OrderSouq();
 
 const index = async (_req: Request, res: Response) => {
@@ -13,14 +22,23 @@ const index = async (_req: Request, res: Response) => {
  res.json(err);
   }
 }
- 
+
 
 const show = async (req: Request, res: Response) => {
     const Order = await onen.show(req.params.id);
     res.json(Order)
 }
+const token_secret = process.env.TOKEN_SECRET!;
+
 const create = async (req: Request, res: Response) => {
     try {
+        const token = req.headers['authorization']
+        // const token = authHeader && authHeader.split(' ')[1]
+        // console.log(token);
+        
+       const tk= jwt.verify(token as string, token_secret)
+        console.log(tk);console.log('zzzzzzzzz');
+
         const Order0: Order = {
             id:  req.body.id,
             quantity:  req.body.quantity,
@@ -75,10 +93,10 @@ const delOrder = async (req: Request, res: Response) => {
 // };
 
 const Order_routes = (app: express.Application) => {
-  app.get('/Orders', index);
-  app.get('/Orders/:id', show);
-  app.post('/Orders', create);
-  app.patch('/Orders', update);
-  app.delete('/Orders', delOrder);
+  app.get('/Orders', authenticateToken, index);
+  app.get('/Orders/:id', authenticateToken, show);
+  app.post('/Orders', authenticateToken, create);
+  app.patch('/Orders', authenticateToken, update);
+  app.delete('/Orders', authenticateToken, delOrder);
 };
 export default Order_routes;

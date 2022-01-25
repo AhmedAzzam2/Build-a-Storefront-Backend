@@ -12,7 +12,7 @@ document.getElementById('generate').addEventListener('click', (e) => {
     const newLocal = document.localhost = '#footer';
     return fetch('http://localhost:3000/books', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' , 'authorization': document.getElementById('token').value },
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
@@ -45,7 +45,7 @@ document.getElementById('generate2').addEventListener('click', (e) => {
     const newLocal = document.localhost = '#footer';
     return fetch('http://localhost:3000/books/up', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
@@ -66,7 +66,12 @@ document.getElementById('generate2').addEventListener('click', (e) => {
 
 
 let UL = async () => {
-    let res = await fetch(`http://localhost:3000/books`);
+    let res = await fetch(`http://localhost:3000/books`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
+        // body: JSON.stringify({ "id": 'id' }),
+        // body: {"id":id}
+    })
     try {
         res.json().then(mydata => {
             console.log(mydata)
@@ -101,10 +106,7 @@ let UL = async () => {
         catchErr(error);
     }
 }
-
-UL()
-
-
+ 
 
 /// edit
 // function showBook(id) {
@@ -119,7 +121,13 @@ UL()
 
 
 let showBook = async (id) => {
-    let res = await fetch(`http://localhost:3000/books/${id}`);
+    let res = await fetch(`http://localhost:3000/books/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
+        // body: JSON.stringify({ "id": 'id' }),
+        // body: {"id":id}
+     
+       } );
     try {
         res.json().then(mydata => { 
             let data
@@ -146,7 +154,7 @@ function deletBook(id) {
 
     return fetch('http://localhost:3000/books', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify({ "id": id }),
         // body: {"id":id}
     }).then(
@@ -179,7 +187,7 @@ document.getElementById('generateUser').addEventListener('click', (e) => {
     // const newLocal = document.localhost = '#footer';
     return fetch('http://localhost:3000/users', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
@@ -200,7 +208,13 @@ document.getElementById('generateUser').addEventListener('click', (e) => {
  
 
 let ULuser = async () => {
-    let res = await fetch(`http://localhost:3000/users`);
+    let res = await fetch(`http://localhost:3000/users`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
+        // body: JSON.stringify({ "id": 'id' }),
+        // body: {"id":id}
+     
+       } );
     try {
         res.json().then(mydata => {
             console.log(mydata)
@@ -245,7 +259,13 @@ ULuser()
 
 
 let showUser = async (id) => {
-    let res = await fetch(`http://localhost:3000/users/${id}`);
+    let res = await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
+        // body: JSON.stringify({ "id": 'id' }),
+        // body: {"id":id}
+     
+       } );
     try {
         res.json().then(mydata => { 
             let data
@@ -272,7 +292,7 @@ function deletUser(id) {
 
     return fetch('http://localhost:3000/users', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify({ "id": id }),
         // body: {"id":id}
     }).then(
@@ -305,7 +325,7 @@ document.getElementById('generateOrder').addEventListener('click', (e) => {
     // const newLocal = document.localhost = '#footer';
     return fetch('http://localhost:3000/orders', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
@@ -326,7 +346,14 @@ document.getElementById('generateOrder').addEventListener('click', (e) => {
  
 
 let ULorder = async () => {
-    let res = await fetch(`http://localhost:3000/orders`);
+    let res = await fetch(`http://localhost:3000/orders`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
+        // body: JSON.stringify({ "id": 'id' }),
+        // body: {"id":id}
+     
+       } );
+
     try {
         res.json().then(mydata => {
             console.log(mydata)
@@ -354,7 +381,7 @@ let ULorder = async () => {
     }
 }
 
-ULorder()
+
 
 
 
@@ -371,7 +398,14 @@ ULorder()
 
 
 let showOrder = async (id) => {
-    let res = await fetch(`http://localhost:3000/orders/${id}`);
+    let res = await fetch(`http://localhost:3000/orders/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
+        // body: JSON.stringify({ "id": 'id' }),
+        // body: {"id":id}
+     
+       } );
+
     try {
         res.json().then(mydata => { 
             let data
@@ -395,7 +429,7 @@ function addcard(id) {
  
     return fetch('http://localhost:3000/Orders', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify(   { 
             "quantity":  document.querySelector("#quantity"+id).value, 
             "books_id": id,
@@ -419,7 +453,7 @@ function deletOrder(id) {
 
     return fetch('http://localhost:3000/orders', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' , 'authorization': document.getElementById('token').value },
         body: JSON.stringify({ "id": id }),
         // body: {"id":id}
     }).then(
