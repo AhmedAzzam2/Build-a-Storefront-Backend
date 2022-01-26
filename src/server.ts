@@ -1,13 +1,12 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import client from './database'
-import User_routes from './routes/User'
-import Book_routes from './routes/books'
-import Order_routes from './routes/order'
+import User_routes from './routes//api/userUrl'
+import Book_routes from './routes/api/booksUrl'
+import Order_routes from './routes/api/orderUrl'
 import {BookSouq,Book} from './models/book'
 import {OrderSouq,Order} from './models/order'
 import Pool from './database'
-// import booksRoute from '../routes/books'
 
 const app: express.Application = express()
 const address: string = "0.0.0.0:3000"

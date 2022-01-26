@@ -1,11 +1,10 @@
 import express, { Request, Response } from 'express';
 import { BookSouq, Book } from '../models/book';
-import authenticateToken from './auth';
 
-
+// create new obj form BookSouq
 const onen = new BookSouq();
 // create fun route for home api books
-const index = async (_req: Request, res: Response) => {
+export const index = async (_req: Request, res: Response) => {
 
         // wait res fun for get all books 
         const Books = await onen.index();
@@ -13,14 +12,17 @@ const index = async (_req: Request, res: Response) => {
         res.json(Books);
   
 }
-
-const show = async (req: Request, res: Response) => {
+// show single page book api
+export const show = async (req: Request, res: Response) => {
+    // put id book for get info
     const Book = await onen.show(req.params.id);
+    // result info as json
     res.json(Book)
 }
-
-const create = async (req: Request, res: Response) => {
-        const Book0: Book = {
+// makeed created book by form or api
+export const create = async (req: Request, res: Response) => {
+    // get all data for create fun 
+        const BookNew: Book = {
             id: req.body.id,
             title: req.body.title,
             author: req.body.author,
@@ -28,16 +30,18 @@ const create = async (req: Request, res: Response) => {
             price: req.body.price,
             summary: req.body.summary,
         };
+        // check req.body before send to database 
         console.log(req.body);
-
-        const newBook = await onen.create(Book0);
+        // send to database
+        const newBook = await onen.create(BookNew);
         res.json(newBook)
-        console.log(newBook)
+        // check newbook after send to database 
+        console.log(newBook) 
 };
-
-const update = async (req: Request, res: Response) => {
-    try {
-        const Book0: Book = {
+// update book
+export const update = async (req: Request, res: Response) => {
+    // get all data for update fun 
+        const BookNew: Book = {
             id: req.body.id,
             title: req.body.title,
             author: req.body.author,
@@ -45,36 +49,19 @@ const update = async (req: Request, res: Response) => {
             price: req.body.price,
             summary: req.body.summary,
         };
+        // check req.body before send to database 
         console.log(req.body);
-
-        const newBook = await onen.updateBook(Book0);
+        // send to database
+        const newBook = await onen.updateBook(BookNew);
         res.json(newBook)
-        console.log(newBook)
-    } catch (err) {
-        console.log(err)
-        res.status(400);
-        res.json(err);
-    }
+        // check newbook after send to database 
+        console.log(newBook) 
 };
 
-
-const delBook = async (req: Request, res: Response) => {
+// fun delete book by id
+export const delBook = async (req: Request, res: Response) => {
+    // del book by id
     const deleted = await onen.delete(req.body.id)
+    // send data as json
     res.json(deleted)
 }
-
-// const Book_routes = (app: express.Application) => {
-//     app.get('/Books', index);
-//     app.get('/Books/:id', show);
-//     app.post('/Books', verifyAuthToken, create);
-//     app.delete('/Books', verifyAuthToken, delBook);
-// };
-
-const Book_routes = (app: express.Application) => {
-    app.get('/Books', authenticateToken, index);
-    app.get('/Books/:id', authenticateToken, show);
-    app.post('/Books', authenticateToken, create);
-    app.patch('/Books', authenticateToken, update);
-    app.delete('/Books', authenticateToken, delBook);
-};
-export default Book_routes;

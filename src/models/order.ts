@@ -1,6 +1,6 @@
-// @ts-ignore
+// conn database
 import Client from '../database'
-
+// make type  for models
 export type Order = {
      id: number;
      quantity: number;
@@ -9,10 +9,10 @@ export type Order = {
      status: string;
 }
 let id:string
-
+// make class models 
 export class OrderSouq {
+  // function get all  order for user_id
   async index(): Promise<Order[]> {
-    try { 
       // get all order for user_id 
       const conn = await Client.connect()
       // const sql = 'SELECT * FROM order_books'
@@ -24,61 +24,49 @@ export class OrderSouq {
     // books_id bigint REFERENCES books(id) NOT NULL,
 
     const result = await conn.query(sql )
-
+    // conn database release
       conn.release()
       console.log(result.rows);
       
       return result.rows 
-    } catch (err) {
-      throw new Error(`Could not get order_books. Error: ${err}`)
-    }
   }
-
+// fun show book by id
   async show(id: string): Promise<Order> {
-    try {
     const sql = 'SELECT * FROM order_books WHERE id=($1)'
-    // @ts-ignore
+    // conn database
     const conn = await Client.connect()
-
+    // query data info
     const result = await conn.query(sql, [id])
-
+    // conn database release
     conn.release()
-
+    // return show book
     return result.rows[0]
-    } catch (err) {
-        throw new Error(`Could not find order ${id}. Error: ${err}`)
-    }
   }
-
+// make create fun INSERT INTO order_books
   async create(b: Order): Promise<Order> {
-      try {
     const sql = 'INSERT INTO order_books (quantity, user_id, books_id,status ) VALUES($1, $2, $3, $4) RETURNING *'
-    // @ts-ignore
+    // conn database
     const conn = await Client.connect()
-
+    // query data
     const result = await conn
         .query(sql, [b.quantity, b.user_id, b.books_id,b.status ])
 
     const order = result.rows[0]
-
+    // conn database release
     conn.release()
-
+    // return data order
     return order
-      } catch (err) {
-          throw new Error(`Could not add new order . Error: ${err}`)
-      }
   }
 
 
   async updateOrder(b: Order): Promise<Order> {
-    try {
       
       const sql = `UPDATE order_books 
                   SET quantity=$1, user_id=$2, books_id=$3,status=$4
                   WHERE id=$5 
                   RETURNING *`
 
-  // @ts-ignore
+  // conn database
   const conn = await Client.connect()
 
   const result = await conn
@@ -89,15 +77,11 @@ export class OrderSouq {
   conn.release()
 
   return order
-    } catch (err) {
-        throw new Error(`Could not add new order . Error: ${err}`)
-    }
 }
 
   async delete(id: string): Promise<Order> {
-      try {
     const sql = 'DELETE FROM order_books WHERE id=($1)'
-    // @ts-ignore
+    // conn database
     const conn = await Client.connect()
 
     const result = await conn.query(sql, [id])
@@ -107,9 +91,6 @@ export class OrderSouq {
     conn.release()
 
     return order
-      } catch (err) {
-          throw new Error(`Could not delete order ${id}. Error: ${err}`)
-      }
   }
 }
 
