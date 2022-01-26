@@ -32,6 +32,15 @@ const jwt = require('jsonwebtoken');
 const token_secret = process.env.TOKEN_SECRET!;
 
 // created function for check token access 
+export const getUser = (req: Request, res: Response) => {
+
+    const token = req.headers['authorization'] 
+   const tk= jwt.verify(token, token_secret)
+    console.log(tk.user.id);console.log('zzzzzzzzz');
+    
+}
+
+// created function for check token access 
 const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     try {
         // get token from hader

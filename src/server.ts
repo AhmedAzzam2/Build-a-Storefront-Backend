@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import client from './database'
 import User_routes from './routes/User'
@@ -15,8 +14,8 @@ const address: string = "0.0.0.0:3000"
 
 
 //Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Cors for cross origin allowance
 app.use(cors());

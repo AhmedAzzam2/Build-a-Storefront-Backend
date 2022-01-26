@@ -8,18 +8,26 @@ export type Order = {
      books_id: string;
      status: string;
 }
+let id:string
 
 export class OrderSouq {
   async index(): Promise<Order[]> {
-    try {
-      // @ts-ignore
+    try { 
+      // get all order for user_id 
       const conn = await Client.connect()
-      const sql = 'SELECT * FROM order_books'
+      // const sql = 'SELECT * FROM order_books'
+      const sql = `SELECT * FROM books 
+      INNER JOIN order_books ON books.id = order_books.books_id 
+      INNER JOIN users ON users.id = order_books.user_id 
+      order by order_books.books_id asc;`
+    // user_id bigint REFERENCES users(id) NOT NULL,
+    // books_id bigint REFERENCES books(id) NOT NULL,
 
-      const result = await conn.query(sql)
+    const result = await conn.query(sql )
 
       conn.release()
-
+      console.log(result.rows);
+      
       return result.rows 
     } catch (err) {
       throw new Error(`Could not get order_books. Error: ${err}`)

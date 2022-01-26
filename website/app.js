@@ -6,6 +6,7 @@ document.getElementById('generate').addEventListener('click', (e) => {
         "title": document.getElementById('title').value,
         "total_pages": document.getElementById('total_pages').value,
         "author": document.getElementById('author').value,
+        "price": document.getElementById('price').value,
         "summary": document.getElementById('summary').value
     }
 
@@ -20,9 +21,10 @@ document.getElementById('generate').addEventListener('click', (e) => {
             `<tr id="book${data.id}" class="alert alert-success">
                     <th scope="row">${data.id}</th>
                     <td>${data.title}</td>
-                    <td>${data.author}</td>
                     <td>${data.total_pages}</td>
                     <td>${data.summary}</td>
+                    <td>${data.author}</td>
+                    <td>${data.price}</td>
                     <td class="btn btn-danger" onclick="deletBook( ${data.id} )">del</td>
                 </tr>`
         ).then(
@@ -76,6 +78,10 @@ let UL = async () => {
         res.json().then(mydata => {
             console.log(mydata)
             let data
+            let option
+            for (let i = 1; i < 10; i++) {
+              option += `<option value="${i}">${i}</option>`;
+            }
             for (const key in mydata) {
                 data += `
                 <tr id="book${mydata[key].id}">
@@ -83,13 +89,12 @@ let UL = async () => {
                     <td>${mydata[key].title}</td>
                     <td>${mydata[key].author}</td>
                     <td>${mydata[key].total_pages}</td>
+                    <td>${mydata[key].price}</td>
                     <td>${mydata[key].summary}</td>
     <td class="row"> <div style="background-color: #ffd814;" class="btn p-1 col" onclick="addcard( ${mydata[key].id} )">order </div>
     <select class="form-select col" id="quantity${mydata[key].id}">
         <option selected>1</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
+        ${option}
     </select>
     </td>
                     
@@ -317,7 +322,7 @@ document.getElementById('generateOrder').addEventListener('click', (e) => {
     let data = {
         "id": document.getElementById('id').value,
         "quantity": document.getElementById('quantity').value,
-        "order_id": document.getElementById('order_id').value,
+        "user_id": document.getElementById('order_id').value,
         "books_id": document.getElementById('books_id').value,
         "status": document.getElementById('status').value,
     }
@@ -333,7 +338,7 @@ document.getElementById('generateOrder').addEventListener('click', (e) => {
             `<tr id="order${data.id}" class="alert alert-success">
                     <th scope="row">${data.id}</th>
                     <td>${data.quantity}</td>
-                    <td>${data.order_id}</td>
+                    <td>${data.user_id}</td>
                     <td>${data.books_id}</td>
                     <td>${data.status}</td>
                     <td class="btn btn-danger" onclick="deletOrder( ${data.id} )">del</td>
@@ -362,9 +367,13 @@ let ULorder = async () => {
                 data += `
                 <tr id="order${mydata[key].id}">
                     <th scope="row">${mydata[key].id}</th>
+                    <td>${mydata[key].title}</td>
+                    <td>${mydata[key].author}</td>
+                    <td>${mydata[key].total_pages}</td>
+                    <td>${mydata[key].price}</td>
+                    <td>${mydata[key].addcard}</td>
+
                     <td>${mydata[key].quantity}</td>
-                    <td>${mydata[key].order_id}</td>
-                    <td>${mydata[key].books_id}</td>
                     <td>${mydata[key].status}</td>
                     
     <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showOrder( ${mydata[key].id} )"

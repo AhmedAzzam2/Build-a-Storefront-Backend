@@ -6,7 +6,8 @@ export type Book = {
      id: number;
      title: string;
      author: string;
-     totalPages: number;
+     total_pages: number;
+     price: number;
      summary: string;
 }
 // class BookSouq for action crud Model book 
@@ -45,12 +46,12 @@ export class BookSouq {
 // insert book info by fun create
   async create(b: Book): Promise<Book> {
       try {
-    const sql = 'INSERT INTO books (title, author, total_pages, summary) VALUES($1, $2, $3, $4) RETURNING *'
+    const sql = 'INSERT INTO books (title, author, total_pages,price, summary) VALUES($1, $2, $3, $4, $5 ) RETURNING *'
     // connect it 
     const conn = await Client.connect()
 
     const result = await conn
-        .query(sql, [b.title, b.author, b.totalPages, b.summary])
+        .query(sql, [b.title, b.author, b.total_pages,b.price, b.summary])
 
     const book = result.rows[0]
 
@@ -75,7 +76,7 @@ export class BookSouq {
   const conn = await Client.connect()
 // put info in query
   const result = await conn
-      .query(sql, [b.title, b.author, b.totalPages, b.summary,b.id])
+      .query(sql, [b.title, b.author, b.total_pages, b.summary,b.id])
 
   const book = result.rows[0]
 

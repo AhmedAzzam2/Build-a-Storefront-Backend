@@ -43,9 +43,14 @@
             </div>
 
             <div class="form-group col-md-4">
-                <input type="text" class="myInput form-control" id="total_pages"
+                <input type="number" class="myInput form-control" id="total_pages"
                     placeholder="Enter your total_pages here" name="total_pages">
             </div>
+            <div class="form-group col-md-4">
+                <input type="number" class="myInput form-control" id="price"
+                    placeholder="Enter your price here" name="price">
+            </div>
+
 
             <div class="form-group col-md-8">
                 <input type="text" class="myInput form-control" id="summary" placeholder="Enter your summary here"
@@ -74,7 +79,9 @@
                         <th scope="col">title</th>
                         <th scope="col">author</th>
                         <th scope="col">total_pages</th>
+                        <th scope="col">price</th>
                         <th scope="col">summary</th>
+                        <th scope="col">add to card</th>
                         <th scope="col">show</th>
                         <th scope="col">delete</th>
                     </tr>
@@ -120,6 +127,7 @@
                     </div>
                 </div>
             </form>
+            
             <table class="table">
                 <thead>
                     <tr>
@@ -141,7 +149,7 @@
           <!-- order start -->
           <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
               
-            <form id="formElemOrder " class="row">
+            <form id="formElemOrder " class="row" style='display: none;'>
                 <div class="form-group col-md-6">
                     <input type="text" id="quantity" placeholder="enter quantity" class="form-control" name="quantity">
                 </div>
@@ -172,9 +180,13 @@
                     
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">quantity</th>
-                        <th scope="col">order_id</th>
-                        <th scope="col">books_id</th>
+                        <th scope="col">title</th>
+                        <th scope="col">author</th>
+                        <th scope="col">total_pages</th>
+                        <th scope="col">price</th> 
+                        <th scope="col">add to card</th>
+
+                        <th scope="col">quantity</th> 
                         <th scope="col">status</th>
                         <th scope="col">show</th>
                         <th scope="col">delete</th>
