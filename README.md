@@ -25,7 +25,7 @@ npm run reset
 ## test
 ```
 ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test
-```
+
 ## set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset
 ''' 
 npx run server test:window: 
