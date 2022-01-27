@@ -35,7 +35,7 @@ export class UserSouq {
     // return  single page 
     return result.rows[0]
   }
-
+// INSERT INTO users function
   async create(a: User): Promise<User> {
     const sql = 'INSERT INTO users (firstName, lastName, email,phone, password) VALUES($1, $2, $3, $4, $5) RETURNING *'
     // connect database
@@ -50,6 +50,7 @@ export class UserSouq {
   }
 
 
+// UPDATE INTO users function
   async updateUser(a: User): Promise<User> {
       const sql = `UPDATE users 
                   SET firstName=$1, lastName=$2, email=$3,phone=$4, password=$5 
@@ -68,7 +69,7 @@ export class UserSouq {
 
       return user
   }
-
+////// del user
   async delete(id: string): Promise<User> {
       const sql = 'DELETE FROM users WHERE id=($1)'
       // connect database

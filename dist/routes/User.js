@@ -35,30 +35,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.delUser = exports.update = exports.create = exports.show = exports.index = void 0;
 var user_1 = require("../models/user");
-// import verifyAuthToken from '../middleware/verifyauthtoken';
+var bcrypt = require('bcrypt');
+var dotenv = require('dotenv');
+// get config vars
+dotenv.config();
+// access config var 
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var onen = new user_1.UserSouq();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Users, err_1;
+    var Users;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, onen.index()];
+            case 0: return [4 /*yield*/, onen.index()];
             case 1:
                 Users = _a.sent();
                 res.json(Users);
-                return [3 /*break*/, 3];
-            case 2:
-                err_1 = _a.sent();
-                res.status(400);
-                res.json(err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [2 /*return*/];
         }
     });
 }); };
+exports.index = index;
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var User;
     return __generator(this, function (_a) {
@@ -71,68 +73,59 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
         }
     });
 }); };
+exports.show = show;
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var User0, newUser, err_2;
+    var hash, User0, newUser, token;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD, parseInt(process.env.SALT_ROUNDS));
                 User0 = {
                     id: req.body.id,
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
                     phone: req.body.phone,
-                    password: req.body.password,
+                    password: hash,
                 };
                 console.log(req.body);
                 return [4 /*yield*/, onen.create(User0)];
             case 1:
                 newUser = _a.sent();
-                res.json(newUser);
-                console.log(newUser);
-                return [3 /*break*/, 3];
-            case 2:
-                err_2 = _a.sent();
-                console.log(err_2);
-                res.status(400);
-                res.json(err_2);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
+                res.json(token);
+                console.log(token);
+                return [2 /*return*/];
         }
     });
 }); };
+exports.create = create;
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var User0, newUser, err_3;
+    var hash, User0, newUser, token;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD, parseInt(process.env.SALT_ROUNDS));
                 User0 = {
                     id: req.body.id,
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
                     phone: req.body.phone,
-                    password: req.body.password,
+                    password: hash,
                 };
                 console.log(req.body);
                 return [4 /*yield*/, onen.updateUser(User0)];
             case 1:
                 newUser = _a.sent();
-                res.json(newUser);
+                token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
+                res.json(token);
                 console.log(newUser);
-                return [3 /*break*/, 3];
-            case 2:
-                err_3 = _a.sent();
-                console.log(err_3);
-                res.status(400);
-                res.json(err_3);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [2 /*return*/];
         }
     });
 }); };
+exports.update = update;
 var delUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var deleted;
     return __generator(this, function (_a) {
@@ -145,17 +138,4 @@ var delUser = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); };
-// const User_routes = (app: express.Application) => {
-//     app.get('/Users', index);
-//     app.get('/Users/:id', show);
-//     app.post('/Users', verifyAuthToken, create);
-//     app.delete('/Users', verifyAuthToken, delUser);
-// };
-var User_routes = function (app) {
-    app.get('/Users', index);
-    app.get('/Users/:id', show);
-    app.post('/Users', create);
-    app.patch('/Users', update);
-    app.delete('/Users', delUser);
-};
-exports.default = User_routes;
+exports.delUser = delUser;

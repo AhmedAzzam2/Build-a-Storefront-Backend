@@ -43,13 +43,13 @@ export class OrderSouq {
     return result.rows[0]
   }
 // make create fun INSERT INTO order_books
-  async create(b: Order): Promise<Order> {
+  async create(a: Order): Promise<Order> {
     const sql = 'INSERT INTO order_books (quantity, user_id, books_id,status ) VALUES($1, $2, $3, $4) RETURNING *'
     // conn database
     const conn = await Client.connect()
     // query data
     const result = await conn
-        .query(sql, [b.quantity, b.user_id, b.books_id,b.status ])
+        .query(sql, [a.quantity, a.user_id, a.books_id,a.status ])
 
     const order = result.rows[0]
     // conn database release
@@ -59,7 +59,7 @@ export class OrderSouq {
   }
 
 
-  async updateOrder(b: Order): Promise<Order> {
+  async updateOrder(a: Order): Promise<Order> {
       
       const sql = `UPDATE order_books 
                   SET quantity=$1, user_id=$2, books_id=$3,status=$4
@@ -70,7 +70,7 @@ export class OrderSouq {
   const conn = await Client.connect()
 
   const result = await conn
-      .query(sql, [b.quantity, b.user_id, b.books_id,b.status, b.id])
+      .query(sql, [a.quantity, a.user_id, a.books_id,a.status, a.id])
 
   const order = result.rows[0]
 

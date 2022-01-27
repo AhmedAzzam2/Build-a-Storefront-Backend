@@ -1,16 +1,20 @@
 {
-    "dev": {
-      "driver": "pg",
-      "host": "127.0.0.1",
-      "database": "post",
-      "user": "postgres",
-      "password": "a"
-    },
-    "test": {
-      "driver": "pg",
-      "host": "127.0.0.1",
-      "database": "post_test",
-      "user": "postgres",
-      "password": "a"
-    }
+  "dev": {
+    "driver": "pg",
+    "host": "127.0.0.1",
+    "port": "5432",
+    "database": "d2",
+    "user": "postgres",
+    "password": "a",
+    "schema": "public"
+  },
+  "test": {
+    "driver": "pg",
+    "host": "127.0.0.1",
+    "port": "5432",
+    "database": "t1",
+    "user": "postgres",
+    "password": "a",  
+    "schema": "public"
   }
+}

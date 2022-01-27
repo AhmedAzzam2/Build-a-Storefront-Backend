@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { Pool } from 'pg'
 
-dotenv.config() 
+dotenv.config()
 
 const {
   POSTGRES_HOST,
@@ -11,7 +11,10 @@ const {
   POSTGRES_TEST_DB,
   ENV,
 } = process.env
- 
+
+// let client
+// console.log(ENV)
+
 // if(ENV === 'test') {
 //   client = new Pool({
 //     host: POSTGRES_HOST,
@@ -29,6 +32,8 @@ const {
 //     password: POSTGRES_PASSWORD,
 //   })
 // }
+
+// export default client
 
 let client = new Pool({
   host: POSTGRES_HOST,

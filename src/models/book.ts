@@ -36,12 +36,12 @@ export class BookSouq {
       return result.rows[0]
   }
   // insert book info by fun create
-  async create(b: Book): Promise<Book> {
+  async create(a: Book): Promise<Book> {
       const sql = 'INSERT INTO books (title, author, total_pages,price, summary) VALUES($1, $2, $3, $4, $5 ) RETURNING *'
       // connect it 
       const conn = await Client.connect()
 
-      const result = await conn.query(sql, [b.title, b.author, b.total_pages, b.price, b.summary])
+      const result = await conn.query(sql, [a.title, a.author, a.total_pages, a.price, a.summary])
 
       const book = result.rows[0]
 
@@ -51,17 +51,17 @@ export class BookSouq {
   }
 
   // update Book by id
-  async updateBook(b: Book): Promise<Book> {
+  async updateBook(a: Book): Promise<Book> {
       const sql = `UPDATE books 
-                  SET title=$1, author=$2, total_pages=$3, summary=$4 
-                  WHERE id=$5 
+                  SET title=$1, author=$2, total_pages=$3 , price=$4, summary=$5 
+                  WHERE id=$6 
                   RETURNING *`
 
       // conn
       const conn = await Client.connect()
       // put info in query
       const result = await conn
-        .query(sql, [b.title, b.author, b.total_pages, b.summary, b.id])
+        .query(sql, [a.title, a.author, a.total_pages, a.price, a.summary, a.id])
 
       const book = result.rows[0]
 

@@ -36,29 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.delBook = exports.update = exports.create = exports.show = exports.index = void 0;
 var book_1 = require("../models/book");
-// import verifyAuthToken from '../middleware/verifyauthtoken';
+// create new obj form BookSouq
 var onen = new book_1.BookSouq();
+// create fun route for home api books
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Books, err_1;
+    var Books;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, onen.index()];
+            case 0: return [4 /*yield*/, onen.index()];
             case 1:
                 Books = _a.sent();
+                // result all books as json
                 res.json(Books);
-                return [3 /*break*/, 3];
-            case 2:
-                err_1 = _a.sent();
-                res.status(400);
-                res.json(err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [2 /*return*/];
         }
     });
 }); };
+exports.index = index;
+// show single page book api
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var Book;
     return __generator(this, function (_a) {
@@ -66,94 +63,81 @@ var show = function (req, res) { return __awaiter(void 0, void 0, void 0, functi
             case 0: return [4 /*yield*/, onen.show(req.params.id)];
             case 1:
                 Book = _a.sent();
+                // result info as json
                 res.json(Book);
                 return [2 /*return*/];
         }
     });
 }); };
+exports.show = show;
+// makeed created book by form or api
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Book0, newBook, err_2;
+    var BookNew, newBook;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                Book0 = {
+                BookNew = {
                     id: req.body.id,
                     title: req.body.title,
                     author: req.body.author,
-                    totalPages: req.body.totalPages,
+                    total_pages: req.body.total_pages,
+                    price: req.body.price,
                     summary: req.body.summary,
                 };
+                // check req.body before send to database 
                 console.log(req.body);
-                return [4 /*yield*/, onen.create(Book0)];
+                return [4 /*yield*/, onen.create(BookNew)];
             case 1:
                 newBook = _a.sent();
                 res.json(newBook);
+                // check newbook after send to database 
                 console.log(newBook);
-                return [3 /*break*/, 3];
-            case 2:
-                err_2 = _a.sent();
-                console.log(err_2);
-                res.status(400);
-                res.json(err_2);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [2 /*return*/];
         }
     });
 }); };
+exports.create = create;
+// update book
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Book0, newBook, err_3;
+    var BookNew, newBook;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                Book0 = {
+                BookNew = {
                     id: req.body.id,
                     title: req.body.title,
                     author: req.body.author,
-                    totalPages: req.body.totalPages,
+                    total_pages: req.body.total_pages,
+                    price: req.body.price,
                     summary: req.body.summary,
                 };
+                // check req.body before send to database 
                 console.log(req.body);
-                return [4 /*yield*/, onen.updateBook(Book0)];
+                return [4 /*yield*/, onen.updateBook(BookNew)];
             case 1:
                 newBook = _a.sent();
                 res.json(newBook);
+                // check newbook after send to database 
                 console.log(newBook);
-                return [3 /*break*/, 3];
-            case 2:
-                err_3 = _a.sent();
-                console.log(err_3);
-                res.status(400);
-                res.json(err_3);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [2 /*return*/];
         }
     });
 }); };
+exports.update = update;
+// fun delete book by id
 var delBook = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var deleted;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.delete(req.body.id)];
+            case 0: return [4 /*yield*/, onen.delete(req.body.id)
+                // send data as json
+            ];
             case 1:
                 deleted = _a.sent();
+                // send data as json
                 res.json(deleted);
                 return [2 /*return*/];
         }
     });
 }); };
-// const Book_routes = (app: express.Application) => {
-//     app.get('/Books', index);
-//     app.get('/Books/:id', show);
-//     app.post('/Books', verifyAuthToken, create);
-//     app.delete('/Books', verifyAuthToken, delBook);
-// };
-var Book_routes = function (app) {
-    app.get('/Books', index);
-    app.get('/Books/:id', show);
-    app.post('/Books', create);
-    app.patch('/Books', update);
-    app.delete('/Books', delBook);
-};
-exports.default = Book_routes;
+exports.delBook = delBook;

@@ -40,118 +40,110 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserSouq = void 0;
-// @ts-ignore
+// connect database
 var database_1 = __importDefault(require("../database"));
+// make class UserSouq
 var UserSouq = /** @class */ (function () {
     function UserSouq() {
     }
+    // function index for get all users
     UserSouq.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, err_1;
+            var conn, sql, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1.default.connect()];
+                    case 0: return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         sql = 'SELECT * FROM users';
-                        return [4 /*yield*/, conn.query(sql)];
+                        return [4 /*yield*/, conn.query(sql)
+                            // conn database release
+                        ];
                     case 2:
                         result = _a.sent();
+                        // conn database release
                         conn.release();
+                        // return all users
                         return [2 /*return*/, result.rows];
-                    case 3:
-                        err_1 = _a.sent();
-                        throw new Error("Could not get users. Error: ".concat(err_1));
-                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
+    // make function for show single user
     UserSouq.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, err_2;
+            var sql, conn, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 3, , 4]);
                         sql = 'SELECT * FROM users WHERE id=($1)';
-                        return [4 /*yield*/, database_1.default.connect()];
+                        return [4 /*yield*/, database_1.default.connect()
+                            // query sql
+                        ];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
+                        // return  single page 
                         return [2 /*return*/, result.rows[0]];
-                    case 3:
-                        err_2 = _a.sent();
-                        throw new Error("Could not find user ".concat(id, ". Error: ").concat(err_2));
-                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserSouq.prototype.create = function (b) {
+    // INSERT INTO users function
+    UserSouq.prototype.create = function (a) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, user, err_3;
+            var sql, conn, result, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 3, , 4]);
                         sql = 'INSERT INTO users (firstName, lastName, email,phone, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
-                        return [4 /*yield*/, database_1.default.connect()];
+                        return [4 /*yield*/, database_1.default.connect()
+                            // query data create input
+                        ];
                     case 1:
                         conn = _a.sent();
-                        return [4 /*yield*/, conn
-                                .query(sql, [b.firstName, b.lastName, b.email, b.phone, b.password])];
+                        return [4 /*yield*/, conn.query(sql, [a.firstName, a.lastName, a.email, a.phone, a.password])];
                     case 2:
                         result = _a.sent();
                         user = result.rows[0];
                         conn.release();
                         return [2 /*return*/, user];
-                    case 3:
-                        err_3 = _a.sent();
-                        throw new Error("Could not add new user . Error: ".concat(err_3));
-                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserSouq.prototype.updateUser = function (b) {
+    // UPDATE INTO users function
+    UserSouq.prototype.updateUser = function (a) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, user, err_4;
+            var sql, conn, result, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 3, , 4]);
                         sql = "UPDATE users \n                  SET firstName=$1, lastName=$2, email=$3,phone=$4, password=$5 \n                  WHERE id=$6 \n                  RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [b.firstName, b.lastName, b.email, b.phone, b.password, b.id])];
+                                .query(sql, [a.firstName, a.lastName, a.email, a.phone, a.password, a.id])];
                     case 2:
                         result = _a.sent();
                         user = result.rows[0];
                         conn.release();
                         return [2 /*return*/, user];
-                    case 3:
-                        err_4 = _a.sent();
-                        throw new Error("Could not add new user . Error: ".concat(err_4));
-                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
+    ////// del user
     UserSouq.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, user, err_5;
+            var sql, conn, result, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 3, , 4]);
                         sql = 'DELETE FROM users WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
@@ -162,10 +154,6 @@ var UserSouq = /** @class */ (function () {
                         user = result.rows[0];
                         conn.release();
                         return [2 /*return*/, user];
-                    case 3:
-                        err_5 = _a.sent();
-                        throw new Error("Could not delete user ".concat(id, ". Error: ").concat(err_5));
-                    case 4: return [2 /*return*/];
                 }
             });
         });
