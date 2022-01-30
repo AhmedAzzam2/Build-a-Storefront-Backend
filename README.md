@@ -1,4 +1,4 @@
-# image processing api 
+# Build-a-Storefront-Backend
 
 ## Getting Started
 
