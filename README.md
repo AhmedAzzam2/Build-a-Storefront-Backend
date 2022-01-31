@@ -89,8 +89,8 @@ npx run server test:window:
  
 ## API Endpoints
 #### products
-- Index  [token required] 
-- Show [token required] 
+- Index   
+- Show   
 - Create [token required] 
 
 #### Users
