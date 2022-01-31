@@ -4,10 +4,10 @@ import authenticateToken from '../auth';
 
 
 const User_routes = (app: express.Application) => {
-    app.get('/Users', authenticateToken, index);
-    app.get('/Users/:id', authenticateToken, show);
-    app.post('/Users', create);
-    app.patch('/Users', authenticateToken, update);
-    app.delete('/Users', authenticateToken, delUser);
+    app.get('/users', authenticateToken, index);
+    app.get('/users/:id', authenticateToken, show);
+    app.post('/users', create);
+    app.patch('/users', authenticateToken, update);
+    app.delete('/users', authenticateToken, delUser);
 };
 export default User_routes;

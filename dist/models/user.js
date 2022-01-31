@@ -99,13 +99,13 @@ var UserSouq = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = 'INSERT INTO users (firstName, lastName, email,phone, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
+                        sql = 'INSERT INTO users (firstname,lastname,password) VALUES($1, $2, $3) RETURNING *';
                         return [4 /*yield*/, database_1.default.connect()
                             // query data create input
                         ];
                     case 1:
                         conn = _a.sent();
-                        return [4 /*yield*/, conn.query(sql, [a.firstName, a.lastName, a.email, a.phone, a.password])];
+                        return [4 /*yield*/, conn.query(sql, [a.firstname, a.lastname, a.password])];
                     case 2:
                         result = _a.sent();
                         user = result.rows[0];
@@ -122,12 +122,12 @@ var UserSouq = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = "UPDATE users \n                  SET firstName=$1, lastName=$2, email=$3,phone=$4, password=$5 \n                  WHERE id=$6 \n                  RETURNING *";
+                        sql = "UPDATE users \n                  SET firstname=$1, lastname=$2,  password=$3 \n                  WHERE id=$4 \n                  RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [a.firstName, a.lastName, a.email, a.phone, a.password, a.id])];
+                                .query(sql, [a.firstname, a.lastname, a.password, a.id])];
                     case 2:
                         result = _a.sent();
                         user = result.rows[0];

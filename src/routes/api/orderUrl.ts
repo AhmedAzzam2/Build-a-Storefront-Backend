@@ -1,13 +1,14 @@
 import express, { Request, Response } from 'express';
-import { index,show,create,update,delOrder } from '../order';
+import { index,show,create,update,delorder_products, Ordercreate } from '../order';
 import authenticateToken from '../auth';
 
-const Order_routes = (Router: express.Router) => {
-    Router.get('/Orders', authenticateToken, index);
-    Router.get('/Orders/:id', authenticateToken, show);
-    Router.post('/Orders', authenticateToken, create);
-    Router.patch('/Orders', authenticateToken, update);
-    Router.delete('/Orders', authenticateToken, delOrder);
+const order_products_routes = (Router: express.Router) => {
+    Router.get('/orders', authenticateToken, index);
+    Router.get('/orders/:id', authenticateToken, show);
+    Router.post('/orders', authenticateToken, create);
+    Router.patch('/orders', authenticateToken, update);
+    Router.delete('/orders', authenticateToken, delorder_products);
+    Router.post('/orders/:id/products', Ordercreate)
 };
 
-export default Order_routes;
+export default order_products_routes;

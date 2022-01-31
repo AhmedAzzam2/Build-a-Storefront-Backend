@@ -16,9 +16,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Show [token required]
 - Create N[token required]
 
-#### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+#### order_productss
+- Current order_products by user (args: user id)[token required]
+- [OPTIONAL] Completed order_productss by user (args: user id)[token required]
 
 ## Data Shapes
 #### Product
@@ -29,14 +29,14 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### User
 - id
-- firstName
-- lastName
+- firstname
+- lastname
 - password
 
-#### Orders
+#### order_productss
 - id
 - id of each product in the order
 - quantity of each product in the order
-- user_id
+- order_id 
 - status of order (active or complete)
 

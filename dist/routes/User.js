@@ -82,11 +82,9 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD, parseInt(process.env.SALT_ROUNDS));
                 User0 = {
                     id: req.body.id,
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    email: req.body.email,
-                    phone: req.body.phone,
-                    password: hash,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    password: hash
                 };
                 console.log(req.body);
                 return [4 /*yield*/, onen.create(User0)];
@@ -108,10 +106,8 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD, parseInt(process.env.SALT_ROUNDS));
                 User0 = {
                     id: req.body.id,
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    email: req.body.email,
-                    phone: req.body.phone,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
                     password: hash,
                 };
                 console.log(req.body);

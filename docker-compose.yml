@@ -1,14 +1,13 @@
-version: '3.9'
+import express, { Request, Response } from 'express';
+import { index, show, create, update, delUser } from '../User';
+import authenticateToken from '../auth';
 
-services:
-  postgres:
-    image: postgres
-    ports:
-      - '5432:5432'
-    env_file:
-      - .env
-    volumes:
-      - 'postgres:/var/lib/postgresql/data'
 
-volumes:
-  postgres:
+const User_routes = (app: express.Application) => {
+    app.get('/Users', authenticateToken, index);
+    app.get('/Users/:id', authenticateToken, show);
+    app.post('/Users', create);
+    app.patch('/Users', authenticateToken, update);
+    app.delete('/Users', authenticateToken, delUser);
+};
+export default User_routes;

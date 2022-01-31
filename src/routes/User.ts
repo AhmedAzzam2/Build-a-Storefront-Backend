@@ -25,11 +25,9 @@ export const create = async (req: Request, res: Response) => {
     const hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD as string, parseInt(process.env.SALT_ROUNDS as string));
     const User0: User = {
         id: req.body.id,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: hash,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        password: hash
     };
     console.log(req.body);
 
@@ -43,10 +41,8 @@ export const update = async (req: Request, res: Response) => {
     const hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD as string, parseInt(process.env.SALT_ROUNDS as string));
     const User0: User = {
         id: req.body.id,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         password: hash,
     };
     console.log(req.body);

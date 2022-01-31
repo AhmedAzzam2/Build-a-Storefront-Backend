@@ -39,26 +39,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderSouq = void 0;
+exports.order_productsSouq = void 0;
 // conn database
 var database_1 = __importDefault(require("../database"));
 var id;
 // make class models 
-var OrderSouq = /** @class */ (function () {
-    function OrderSouq() {
+var order_productsSouq = /** @class */ (function () {
+    function order_productsSouq() {
     }
-    // function get all  order for user_id
-    OrderSouq.prototype.index = function () {
+    // function get all  order for order_id 
+    order_productsSouq.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, database_1.default.connect()
-                        // const sql = 'SELECT * FROM order_books'
+                        // const sql = 'SELECT * FROM order_products '
                     ];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM books \n      INNER JOIN order_books ON books.id = order_books.books_id \n      INNER JOIN users ON users.id = order_books.user_id \n      order by order_books.books_id asc;";
+                        sql = "SELECT * FROM products  \n      INNER JOIN order_products  ON products .id = order_products .product_id  \n      INNER JOIN users ON users.id = order_products .order_id  \n      order by order_products .product_id  asc;";
                         return [4 /*yield*/, conn.query(sql)
                             // conn database release
                         ];
@@ -72,14 +72,14 @@ var OrderSouq = /** @class */ (function () {
             });
         });
     };
-    // fun show book by id
-    OrderSouq.prototype.show = function (id) {
+    // fun show product by id
+    order_productsSouq.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = 'SELECT * FROM order_books WHERE id=($1)';
+                        sql = 'SELECT * FROM order_products  WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()
                             // query data info
                         ];
@@ -92,27 +92,27 @@ var OrderSouq = /** @class */ (function () {
                         result = _a.sent();
                         // conn database release
                         conn.release();
-                        // return show book
+                        // return show product
                         return [2 /*return*/, result.rows[0]];
                 }
             });
         });
     };
-    // make create fun INSERT INTO order_books
-    OrderSouq.prototype.create = function (a) {
+    // make create fun INSERT INTO order_products 
+    order_productsSouq.prototype.create = function (a) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, order;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = 'INSERT INTO order_books (quantity, user_id, books_id,status ) VALUES($1, $2, $3, $4) RETURNING *';
+                        sql = 'INSERT INTO order_products  (quantity, order_id , product_id ,status ) VALUES($1, $2, $3, $4) RETURNING *';
                         return [4 /*yield*/, database_1.default.connect()
                             // query data
                         ];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [a.quantity, a.user_id, a.books_id, a.status])];
+                                .query(sql, [a.quantity, a.order_id , a.product_id , a.status])];
                     case 2:
                         result = _a.sent();
                         order = result.rows[0];
@@ -124,18 +124,18 @@ var OrderSouq = /** @class */ (function () {
             });
         });
     };
-    OrderSouq.prototype.updateOrder = function (a) {
+    order_productsSouq.prototype.updateorder_products = function (a) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, order;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = "UPDATE order_books \n                  SET quantity=$1, user_id=$2, books_id=$3,status=$4\n                  WHERE id=$5 \n                  RETURNING *";
+                        sql = "UPDATE order_products  \n                  SET quantity=$1, order_id =$2, product_id =$3,status=$4\n                  WHERE id=$5 \n                  RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [a.quantity, a.user_id, a.books_id, a.status, a.id])];
+                                .query(sql, [a.quantity, a.order_id , a.product_id , a.status, a.id])];
                     case 2:
                         result = _a.sent();
                         order = result.rows[0];
@@ -145,13 +145,13 @@ var OrderSouq = /** @class */ (function () {
             });
         });
     };
-    OrderSouq.prototype.delete = function (id) {
+    order_productsSouq.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var sql, conn, result, order;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = 'DELETE FROM order_books WHERE id=($1)';
+                        sql = 'DELETE FROM order_products  WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
@@ -165,6 +165,6 @@ var OrderSouq = /** @class */ (function () {
             });
         });
     };
-    return OrderSouq;
+    return order_productsSouq;
 }());
-exports.OrderSouq = OrderSouq;
+exports.order_productsSouq = order_productsSouq;

@@ -2,11 +2,9 @@
 import Client from '../database'
 // make type  for function
 export type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
+  id?: number;
+  firstname: string;
+  lastname: string;
   password: string;
 }
 // make class UserSouq
@@ -37,11 +35,11 @@ export class UserSouq {
   }
 // INSERT INTO users function
   async create(a: User): Promise<User> {
-    const sql = 'INSERT INTO users (firstName, lastName, email,phone, password) VALUES($1, $2, $3, $4, $5) RETURNING *'
+    const sql = 'INSERT INTO users (firstname,lastname,password) VALUES($1, $2, $3) RETURNING *'
     // connect database
     const conn = await Client.connect()
     // query data create input
-    const result = await conn.query(sql, [a.firstName, a.lastName, a.email, a.phone, a.password])
+    const result = await conn.query(sql, [a.firstname, a.lastname, a.password])
     const user = result.rows[0]
 
     conn.release()
@@ -53,15 +51,15 @@ export class UserSouq {
 // UPDATE INTO users function
   async updateUser(a: User): Promise<User> {
       const sql = `UPDATE users 
-                  SET firstName=$1, lastName=$2, email=$3,phone=$4, password=$5 
-                  WHERE id=$6 
+                  SET firstname=$1, lastname=$2,  password=$3 
+                  WHERE id=$4 
                   RETURNING *`
 
       // connect database
       const conn = await Client.connect()
 
       const result = await conn
-        .query(sql, [a.firstName, a.lastName, a.email, a.phone, a.password, a.id])
+        .query(sql, [a.firstname, a.lastname, a.password, a.id])
 
       const user = result.rows[0]
 

@@ -2,10 +2,10 @@ import express, { Request, Response } from 'express'
 import cors from 'cors'
 import client from './database'
 import User_routes from './routes//api/userUrl'
-import Book_routes from './routes/api/booksUrl'
-import Order_routes from './routes/api/orderUrl'
-import {BookSouq,Book} from './models/book'
-import {OrderSouq,Order} from './models/order'
+import product_routes from './routes/api/productsUrl'
+import order_products_routes from './routes/api/orderUrl'
+import {productSouq,product} from './models/product'
+import {order_productsSouq,order_products} from './models/order'
 import Pool from './database'
 
 const app: express.Application = express()
@@ -19,21 +19,21 @@ app.use(express.json());
 // Cors for cross origin allowance
 app.use(cors());
 
-// Initialize the main project folder
+// Initialize the main product folder
 app.use(express.static('website'));
 
 
 
-let bk =new BookSouq()
+// let bk =new productSouq()
 
-client.connect().then(
-    (db)=>{
-        return db.query('SELECT from books', (err, res) => {
-          console.log(err, res.rows) 
-        })
+// client.connect().then(
+//     (db)=>{
+//         return db.query('SELECT from products ', (err, res) => {
+//           console.log(err, res.rows) 
+//         })
         
-    }
-)
+//     }
+// )
 
 
 
@@ -44,9 +44,9 @@ client.connect().then(
 
  
 
-Book_routes(app);
+product_routes(app);
 User_routes(app);
-Order_routes(app);
+order_products_routes(app);
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`)

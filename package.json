@@ -7,11 +7,12 @@
     "start": "nodemon src/server.ts",
     "migration:run": "db-migrate up",
     "format": "prettier --write src/**/*.ts",
-    "test": "ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "test": "set ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test",
     "test:window": "set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset",
     "reset":"db-migrate --env test reset",
     "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "tsc":"npx tsc"
   },
   "author": "Ahmed Azzam",
   "license": "ISC",

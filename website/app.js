@@ -11,21 +11,21 @@ document.getElementById('generate').addEventListener('click', (e) => {
     }
 
     const newLocal = document.localhost = '#footer';
-    return fetch('http://localhost:3000/books', {
+    return fetch('http://localhost:3000/products ', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' , 'authorization': document.getElementById('token').value },
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
             document.getElementById('card').innerHTML +=
-            `<tr id="book${data.id}" class="alert alert-success">
+            `<tr id="product${data.id}" class="alert alert-success">
                     <th scope="row">${data.id}</th>
                     <td>${data.title}</td>
                     <td>${data.total_pages}</td>
                     <td>${data.summary}</td>
                     <td>${data.author}</td>
                     <td>${data.price}</td>
-                    <td class="btn btn-danger" onclick="deletBook( ${data.id} )">del</td>
+                    <td class="btn btn-danger" onclick="deletproduct( ${data.id} )">del</td>
                 </tr>`
         ).then(
             window.location = '#footer'
@@ -45,20 +45,20 @@ document.getElementById('generate2').addEventListener('click', (e) => {
     }
 
     const newLocal = document.localhost = '#footer';
-    return fetch('http://localhost:3000/books/up', {
+    return fetch('http://localhost:3000/products /up', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify(data),
     })
         .then(response => response.json()).then(data =>
             document.getElementById('card').innerHTML +=
-            `<tr id="book${data.id}" class="alert alert-success">
+            `<tr id="product${data.id}" class="alert alert-success">
                     <th scope="row">${data.id}</th>
                     <td>${data.title}</td>
                     <td>${data.author}</td>
                     <td>${data.total_pages}</td>
                     <td>${data.summary}</td>
-                    <td class="btn btn-danger" onclick="deletBook( ${data.id} )">del</td>
+                    <td class="btn btn-danger" onclick="deletproduct( ${data.id} )">del</td>
                 </tr>`
         ).then(
             window.location = '#footer'
@@ -68,7 +68,7 @@ document.getElementById('generate2').addEventListener('click', (e) => {
 
 
 let UL = async () => {
-    let res = await fetch(`http://localhost:3000/books`, {
+    let res = await fetch(`http://localhost:3000/products `, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         // body: JSON.stringify({ "id": 'id' }),
@@ -84,7 +84,7 @@ let UL = async () => {
             }
             for (const key in mydata) {
                 data += `
-                <tr id="book${mydata[key].id}">
+                <tr id="product${mydata[key].id}">
                     <th scope="row">${mydata[key].id}</th>
                     <td>${mydata[key].title}</td>
                     <td>${mydata[key].author}</td>
@@ -98,10 +98,10 @@ let UL = async () => {
     </select>
     </td>
                     
-    <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showBook( ${mydata[key].id} )"
+    <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showproduct( ${mydata[key].id} )"
     data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].title}" data-bs-whatever3="${mydata[key].author}" data-bs-whatever4="${mydata[key].total_pages}"  data-bs-whatever5="${mydata[key].summary}">Open</button></td>
 
-                    <td class="btn bg-danger p-1" onclick="deletBook( ${mydata[key].id} )">delete</td>
+                    <td class="btn bg-danger p-1" onclick="deletproduct( ${mydata[key].id} )">delete</td>
               </tr> 
             `;
             }
@@ -114,19 +114,19 @@ let UL = async () => {
  
 
 /// edit
-// function showBook(id) {
+// function showproduct(id) {
 //     const formData = new FormData();
 //     formData.append('id', id);
 
-//     return fetch(`http://localhost:3000/books/${id}`, { 
+//     return fetch(`http://localhost:3000/products /${id}`, { 
 //     }).then(data => console.log(data.json())
 
 //         )
 // }
 
 
-let showBook = async (id) => {
-    let res = await fetch(`http://localhost:3000/books/${id}`, {
+let showproduct = async (id) => {
+    let res = await fetch(`http://localhost:3000/products /${id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         // body: JSON.stringify({ "id": 'id' }),
@@ -137,7 +137,7 @@ let showBook = async (id) => {
         res.json().then(mydata => { 
             let data
             data += `
-            <div id="book${mydata.id}">
+            <div id="product${mydata.id}">
                 <div scope="row">${mydata.id}</div>
                 <div>${mydata.title}</div>
                 <div>${mydata.author}</div>
@@ -153,17 +153,17 @@ let showBook = async (id) => {
 
 
 /// delet
-function deletBook(id) {
+function deletproduct(id) {
     const formData = new FormData();
     formData.append('id', id);
 
-    return fetch('http://localhost:3000/books', {
+    return fetch('http://localhost:3000/products ', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify({ "id": id }),
         // body: {"id":id}
     }).then(
-        document.querySelector(`#book${id}`).remove()
+        document.querySelector(`#product${id}`).remove()
     )
         .then(
             document.getElementById('alert').innerHTML += `<div  class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -182,8 +182,8 @@ document.getElementById('generateUser').addEventListener('click', (e) => {
     e.preventDefault();
     let data = {
         "id": document.getElementById('id').value,
-        "firstName": document.getElementById('firstName').value,
-        "lastName": document.getElementById('lastName').value,
+        "firstname": document.getElementById('firstname').value,
+        "lastname": document.getElementById('lastname').value,
         "email": document.getElementById('email').value,
         "phone": document.getElementById('phone').value,
         "password": document.getElementById('password').value
@@ -277,8 +277,8 @@ let showUser = async (id) => {
             data += `
             <div id="user${mydata.id}">
                 <div scope="row">${mydata.id}</div>
-                <div>${mydata.firstName}</div>
-                <div>${mydata.lastName}</div>
+                <div>${mydata.firstname}</div>
+                <div>${mydata.lastname}</div>
                 <div>${mydata.email}</div>
                 <div>${mydata.phone}</div>
           </div`;
@@ -316,14 +316,14 @@ function deletUser(id) {
 
 
 // order start 
-document.getElementById('generateOrder').addEventListener('click', (e) => {
+document.getElementById('generateorder_products').addEventListener('click', (e) => {
 
     e.preventDefault();
     let data = {
         "id": document.getElementById('id').value,
         "quantity": document.getElementById('quantity').value,
-        "user_id": document.getElementById('order_id').value,
-        "books_id": document.getElementById('books_id').value,
+        "order_id ": document.getElementById('order_id').value,
+        "product_id ": document.getElementById('product_id ').value,
         "status": document.getElementById('status').value,
     }
 
@@ -338,10 +338,10 @@ document.getElementById('generateOrder').addEventListener('click', (e) => {
             `<tr id="order${data.id}" class="alert alert-success">
                     <th scope="row">${data.id}</th>
                     <td>${data.quantity}</td>
-                    <td>${data.user_id}</td>
-                    <td>${data.books_id}</td>
+                    <td>${data.order_id }</td>
+                    <td>${data.product_id }</td>
                     <td>${data.status}</td>
-                    <td class="btn btn-danger" onclick="deletOrder( ${data.id} )">del</td>
+                    <td class="btn btn-danger" onclick="deletorder_products( ${data.id} )">del</td>
                 </tr>`,
                 window.location = '#footer'
         )
@@ -376,10 +376,10 @@ let ULorder = async () => {
                     <td>${mydata[key].quantity}</td>
                     <td>${mydata[key].status}</td>
                     
-    <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showOrder( ${mydata[key].id} )"
-    data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].quantity}" data-bs-whatever3="${mydata[key].books_id}" data-bs-whatever4="${mydata[key].order_id}"  data-bs-whatever5="${mydata[key].status}">Open</button></td>
+    <td><button type="button" id="btn${mydata[key].id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showorder_products( ${mydata[key].id} )"
+    data-bs-whatever="${mydata[key].id}" data-bs-whatever2="${mydata[key].quantity}" data-bs-whatever3="${mydata[key].product_id }" data-bs-whatever4="${mydata[key].order_id}"  data-bs-whatever5="${mydata[key].status}">Open</button></td>
 
-                    <td class="btn bg-danger p-1" onclick="deletOrder( ${mydata[key].id} )">delete</td>
+                    <td class="btn bg-danger p-1" onclick="deletorder_products( ${mydata[key].id} )">delete</td>
               </tr> 
             `;
             }
@@ -395,7 +395,7 @@ let ULorder = async () => {
 
 
 /// edit
-// function showOrder(id) {
+// function showorder_products(id) {
 //     const formData = new FormData();
 //     formData.append('id', id);
 
@@ -406,7 +406,7 @@ let ULorder = async () => {
 // }
 
 
-let showOrder = async (id) => {
+let showorder_products = async (id) => {
     let res = await fetch(`http://localhost:3000/orders/${id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
@@ -423,7 +423,7 @@ let showOrder = async (id) => {
                 <div scope="row">${mydata.id}</div>
                 <div>${mydata.quantity}</div>
                 <div>${mydata.order_id}</div>
-                <div>${mydata.books_id}</div>
+                <div>${mydata.product_id }</div>
                 <div>${mydata.status}</div>
           </div`;
             document.getElementById('formElem2').innerHTML = data
@@ -436,12 +436,12 @@ let showOrder = async (id) => {
 
 function addcard(id) { 
  
-    return fetch('http://localhost:3000/Orders', {
+    return fetch('http://localhost:3000/order_productss', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'authorization': document.getElementById('token').value },
         body: JSON.stringify(   { 
             "quantity":  document.querySelector("#quantity"+id).value, 
-            "books_id": id,
+            "product_id ": id,
             "status": "active;"
        }),
         // body: {"id":id}
@@ -456,7 +456,7 @@ function addcard(id) {
 
 
 /// delet
-function deletOrder(id) {
+function deletorder_products(id) {
     const formData = new FormData();
     formData.append('id', id);
 

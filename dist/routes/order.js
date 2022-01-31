@@ -36,24 +36,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.delOrder = exports.update = exports.create = exports.show = exports.index = void 0;
+exports.delorder_products = exports.update = exports.create = exports.show = exports.index = void 0;
 var dotenv = require('dotenv');
 // get config vars
 dotenv.config();
 var jwt = require('jsonwebtoken');
 var order_1 = require("../models/order");
 var bcrypt = require('bcrypt');
-var onen = new order_1.OrderSouq();
+var onen = new order_1.order_productsSouq();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Orders, err_1;
+    var order_productss, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, onen.index()];
             case 1:
-                Orders = _a.sent();
-                res.json(Orders);
+                order_productss = _a.sent();
+                res.json(order_productss);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -66,67 +66,67 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
 }); };
 exports.index = index;
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Order;
+    var order_products;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, onen.show(req.params.id)];
             case 1:
-                Order = _a.sent();
-                res.json(Order);
+                order_products = _a.sent();
+                res.json(order_products);
                 return [2 /*return*/];
         }
     });
 }); };
 exports.show = show;
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, tk, Order0, newOrder;
+    var token, tk, order_products0, neworder_products;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 token = req.headers['authorization'];
                 tk = jwt.verify(token, process.env.TOKEN_SECRET);
-                Order0 = {
+                order_products0 = {
                     id: req.body.id,
                     quantity: req.body.quantity,
-                    user_id: tk.user.id,
-                    books_id: req.body.books_id,
+                    order_id : tk.user.id,
+                    product_id : req.body.product_id ,
                     status: req.body.status,
                 };
                 console.log(req.body);
-                return [4 /*yield*/, onen.create(Order0)];
+                return [4 /*yield*/, onen.create(order_products0)];
             case 1:
-                newOrder = _a.sent();
-                res.json(newOrder);
-                console.log(newOrder);
+                neworder_products = _a.sent();
+                res.json(neworder_products);
+                console.log(neworder_products);
                 return [2 /*return*/];
         }
     });
 }); };
 exports.create = create;
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Order0, newOrder;
+    var order_products0, neworder_products;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                Order0 = {
+                order_products0 = {
                     id: req.body.id,
                     quantity: req.body.quantity,
-                    user_id: req.body.user_id,
-                    books_id: req.body.books_id,
+                    order_id : req.body.order_id ,
+                    product_id : req.body.product_id ,
                     status: req.body.status,
                 };
                 console.log(req.body);
-                return [4 /*yield*/, onen.updateOrder(Order0)];
+                return [4 /*yield*/, onen.updateorder_products(order_products0)];
             case 1:
-                newOrder = _a.sent();
-                res.json(newOrder);
-                console.log(newOrder);
+                neworder_products = _a.sent();
+                res.json(neworder_products);
+                console.log(neworder_products);
                 return [2 /*return*/];
         }
     });
 }); };
 exports.update = update;
-var delOrder = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var delorder_products = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var deleted;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -138,4 +138,4 @@ var delOrder = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
         }
     });
 }); };
-exports.delOrder = delOrder;
+exports.delorder_products = delorder_products;

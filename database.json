@@ -3,7 +3,7 @@
     "driver": "pg",
     "host": "127.0.0.1",
     "port": "5432",
-    "database": "d2",
+    "database": "p1",
     "user": "postgres",
     "password": "a",
     "schema": "public"

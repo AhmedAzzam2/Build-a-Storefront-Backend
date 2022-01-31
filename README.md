@@ -4,17 +4,25 @@
 
 ### Installing Dependencies
 
-project requires having node installed https://nodejs.org/en/download/
+product requires having node installed https://nodejs.org/en/download/
 
 run ```npm install``` to install the dependencies
 
+## db info .env
+'''
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=p1
+POSTGRES_TEST_DB=t1
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=a
+'''
 ## Testing
 Testing is done using jasmine
 To run the tests, run 
 
-npm run start
+start
 ```
-## db-migrate up
+## npm run start
 ```
 migration:run
 ```
@@ -40,14 +48,44 @@ npx run server test:window:
     - Returns a crud work on api server
 - Sample: `curl http://127.0.0.1:3000/`
 
-
-
- ![alt text]( https://github.com/AhmedAzzam2/Build-a-Storefront-Backend/blob/main/image/Screenshot%202022-01-26%20212917.jpg?raw=true)
-
+### GET /users
+- General:
+    - Returns all users on api server
+- Sample: `curl http://127.0.0.1:3000/users`
+### post /users
+- General:
+    - add user on api server
+- Sample: `curl http://127.0.0.1:3000/users`
+### GET /products
+- General:
+    - Returns all products on api server
+- Sample: `curl http://127.0.0.1:3000/products`
+### post /products
+- General:
+    - add user on api server
+- Sample: `curl http://127.0.0.1:3000/products`
+### GET /orders
+- General:
+    - Returns all orders on api server
+- Sample: `curl http://127.0.0.1:3000/orders`
+### post /orders
+- General:
+    - add user on api server
+- Sample: `curl http://127.0.0.1:3000/orders`
+### post /orders
+- General:
+    - add user on api server
+- Sample: `curl http://127.0.0.1:3000/orders`
+ 
+### GET //orders/:id/products
+- General: 
+    - add user on api server
+- Sample: `curl http://127.0.0.1:3000/orders/:id/products`
+ 
 ## API Endpoints
-#### Books
-- Index 
-- Show
+#### products
+- Index  [token required] 
+- Show [token required] 
 - Create [token required] 
 
 #### Users
@@ -55,32 +93,29 @@ npx run server test:window:
 - Show [token required]
 - Create N[token required]
 
-#### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+#### order_productss
+- Current order_products by user (args: user id)[token required]
 
 ## Data Shapes
-#### books access by token
+#### products  access by token
 -  id
--  title: string;
--  author: string;
--  total_pages: number;
+-  name: string;
 -  price: number;
--  summary: string;
 
 #### User 
 -id: number;
--firstName: string;
--lastName: string;
--email: string;
--phone: string;
+-firstname: string;
+-lastname: string;
 -password: string;
 
-#### Orders access by token
+#### order_productss access by token
 -id: number;
 -quantity: number;
--user_id: string;
--books_id: string;
+-order_id : string;
+-product_id : string;
+#### order_productss access by token
+-id: number;
+-user_id : string;
 -status: string;
 
 
@@ -89,7 +124,7 @@ npx run server test:window:
 <sup>Ahmed Azzam
 
 ## my source code 
-https://github.com/udacity/nd0067-c2-creating-an-api-with-postgresql-and-express-project-starter
+https://github.com/udacity/nd0067-c2-creating-an-api-with-postgresql-and-express-product-starter
 
 <sup> and jwt
 https://github.com/bcaudan/jasmine-spec-reporter/tree/master/examples/typescript
