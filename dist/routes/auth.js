@@ -16,13 +16,18 @@ var getUser = function (req, res) {
 exports.getUser = getUser;
 // created function for check token access 
 var authenticateToken = function (req, res, next) {
-    // get token from hader
-    var token = req.headers['authorization'];
-    // const token = authHeader && authHeader.split(' ')[1]
-    // console.log(token);
-    var tk = jwt.verify(token, token_secret);
-    console.log(tk);
-    console.log('zzzzzzzzz');
-    next();
+    try {
+        // get token from hader
+        var token = req.headers['authorization'];
+        // const token = authHeader && authHeader.split(' ')[1]
+        // console.log(token);
+        var tk = jwt.verify(token, token_secret);
+        console.log(tk);
+        console.log('zzzzzzzzz');
+        next();
+    }
+    catch (error) {
+        res.send(400);
+    }
 };
 exports.default = authenticateToken;

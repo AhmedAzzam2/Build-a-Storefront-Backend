@@ -25,11 +25,11 @@ export const index = async (_req: Request, res: Response) => {
 
 
 export const show = async (req: Request, res: Response) => {
-    const order_products = await onen.show(req.params.id);
-    res.json(order_products)
+    res.send(400)
 }
 
 export const create = async (req: Request, res: Response) => {
+try {
     const token = req.headers['authorization']
     const tk = jwt.verify(token, process.env.TOKEN_SECRET!)
 
@@ -44,9 +44,14 @@ export const create = async (req: Request, res: Response) => {
     const neworder_products = await onen.create(order_products0);
     res.json(neworder_products)
     console.log(neworder_products)
+} catch (error) {
+    res.send(400)
+}
 };
 
 export const update = async (req: Request, res: Response) => {
+    try {
+        
     const order_products0: order_products = {
         id: req.body.id,
         quantity: req.body.quantity,
@@ -58,26 +63,38 @@ export const update = async (req: Request, res: Response) => {
     const neworder_products = await onen.updateorder_products(order_products0);
     res.json(neworder_products)
     console.log(neworder_products)
+    } catch (error) {
+        res.send(400)
+    }
 };
 
 
 export const delorder_products = async (req: Request, res: Response) => {
+    try {
+        
     const deleted = await onen.delete(req.body.id)
     res.json(deleted)
+    } catch (error) {
+        res.send(400)
+    }
 }
 
-export const Ordercreate = async (req: Request, res: Response) => {
-    const token = req.headers['authorization']
-    const tk = jwt.verify(token, process.env.TOKEN_SECRET!)
+export const OrderCreate = async (req: Request, res: Response) => {
+    try {
+        const token = req.headers['authorization']
+        const tk = jwt.verify(token, process.env.TOKEN_SECRET!)
 
-    const order_products: order = {
-        id: req.body.id,
-        status: req.body.status,
-        user_id: tk.user.id,
-    };
-    console.log(req.body);
+        const order_products: order = {
+            id: req.body.id,
+            status: req.body.status,
+            user_id: tk.user.id,
+        };
+        console.log(req.body);
 
-    const neworder_products = await onen.ordercreate(order_products);
-    res.json(neworder_products)
-    console.log(neworder_products)
+        const neworder_products = await onen.ordercreate(order_products);
+        res.json(neworder_products)
+        console.log(neworder_products)
+    } catch (error) {
+        res.send(400)
+    }
 };

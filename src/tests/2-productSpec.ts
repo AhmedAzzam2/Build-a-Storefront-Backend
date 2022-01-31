@@ -21,7 +21,7 @@ describe("Souq Model", () => {
       'price': 10,
     });
     // check Equal result
-    console.log(result);
+    console.log(result.price);
     
     expect(result).toEqual({
       'id': 1,

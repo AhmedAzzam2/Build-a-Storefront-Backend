@@ -42,7 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.order_productsSouq = void 0;
 // conn database
 var database_1 = __importDefault(require("../database"));
-var id;
 // make class models 
 var order_productsSouq = /** @class */ (function () {
     function order_productsSouq() {
@@ -50,15 +49,17 @@ var order_productsSouq = /** @class */ (function () {
     // function get all  order for order_id 
     order_productsSouq.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()
-                        // const sql = 'SELECT * FROM order_products '
-                    ];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()
+                            // const sql = 'SELECT * FROM order_products '
+                        ];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM products  \n      INNER JOIN order_products  ON products .id = order_products .product_id  \n      INNER JOIN users ON users.id = order_products .order_id  \n      order by order_products .product_id  asc;";
+                        sql = "SELECT * FROM products  \n      INNER JOIN order_products  ON products .id = order_products .product_id  \n      order by order_products .product_id  asc;";
                         return [4 /*yield*/, conn.query(sql)
                             // conn database release
                         ];
@@ -68,6 +69,10 @@ var order_productsSouq = /** @class */ (function () {
                         conn.release();
                         console.log(result.rows);
                         return [2 /*return*/, result.rows];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_1));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -75,10 +80,11 @@ var order_productsSouq = /** @class */ (function () {
     // fun show product by id
     order_productsSouq.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result;
+            var sql, conn, result, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 3, , 4]);
                         sql = 'SELECT * FROM order_products  WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()
                             // query data info
@@ -94,6 +100,10 @@ var order_productsSouq = /** @class */ (function () {
                         conn.release();
                         // return show product
                         return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        err_2 = _a.sent();
+                        throw new Error("Cannot get orders. Erorr: ".concat(err_2));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -101,18 +111,19 @@ var order_productsSouq = /** @class */ (function () {
     // make create fun INSERT INTO order_products 
     order_productsSouq.prototype.create = function (a) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, order;
+            var sql, conn, result, order, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = 'INSERT INTO order_products  (quantity, order_id , product_id ,status ) VALUES($1, $2, $3, $4) RETURNING *';
+                        _a.trys.push([0, 3, , 4]);
+                        sql = 'INSERT INTO order_products  (quantity, order_id , product_id  ) VALUES($1, $2, $3 ) RETURNING *';
                         return [4 /*yield*/, database_1.default.connect()
                             // query data
                         ];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [a.quantity, a.order_id , a.product_id , a.status])];
+                                .query(sql, [a.quantity, a.order_id, a.product_id])];
                     case 2:
                         result = _a.sent();
                         order = result.rows[0];
@@ -120,37 +131,47 @@ var order_productsSouq = /** @class */ (function () {
                         conn.release();
                         // return data order
                         return [2 /*return*/, order];
+                    case 3:
+                        err_3 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_3));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     order_productsSouq.prototype.updateorder_products = function (a) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, order;
+            var sql, conn, result, order, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sql = "UPDATE order_products  \n                  SET quantity=$1, order_id =$2, product_id =$3,status=$4\n                  WHERE id=$5 \n                  RETURNING *";
+                        _a.trys.push([0, 3, , 4]);
+                        sql = "UPDATE order_products  \n  SET quantity=$1, order_id =$2, product_id =$3\n  WHERE id=$4 \n  RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         return [4 /*yield*/, conn
-                                .query(sql, [a.quantity, a.order_id , a.product_id , a.status, a.id])];
+                                .query(sql, [a.quantity, a.order_id, a.product_id, a.id])];
                     case 2:
                         result = _a.sent();
                         order = result.rows[0];
                         conn.release();
                         return [2 /*return*/, order];
+                    case 3:
+                        err_4 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_4));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     order_productsSouq.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, order;
+            var sql, conn, result, order, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 3, , 4]);
                         sql = 'DELETE FROM order_products  WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
@@ -161,6 +182,41 @@ var order_productsSouq = /** @class */ (function () {
                         order = result.rows[0];
                         conn.release();
                         return [2 /*return*/, order];
+                    case 3:
+                        err_5 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_5));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // make create fun INSERT INTO order_products 
+    order_productsSouq.prototype.ordercreate = function (a) {
+        return __awaiter(this, void 0, void 0, function () {
+            var sql, conn, result, order, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        sql = 'INSERT INTO orders  ( status , user_id  ) VALUES($1, $2 ) RETURNING *';
+                        return [4 /*yield*/, database_1.default.connect()
+                            // query data
+                        ];
+                    case 1:
+                        conn = _a.sent();
+                        return [4 /*yield*/, conn
+                                .query(sql, [a.status, a.user_id])];
+                    case 2:
+                        result = _a.sent();
+                        order = result.rows[0];
+                        // conn database release
+                        conn.release();
+                        // return data order
+                        return [2 /*return*/, order];
+                    case 3:
+                        err_6 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_6));
+                    case 4: return [2 /*return*/];
                 }
             });
         });

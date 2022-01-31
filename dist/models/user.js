@@ -49,10 +49,12 @@ var UserSouq = /** @class */ (function () {
     // function index for get all users
     UserSouq.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result;
+            var conn, sql, result, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, database_1.default.connect()];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
                         sql = 'SELECT * FROM users';
@@ -65,6 +67,10 @@ var UserSouq = /** @class */ (function () {
                         conn.release();
                         // return all users
                         return [2 /*return*/, result.rows];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_1));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -72,10 +78,11 @@ var UserSouq = /** @class */ (function () {
     // make function for show single user
     UserSouq.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result;
+            var sql, conn, result, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 3, , 4]);
                         sql = 'SELECT * FROM users WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()
                             // query sql
@@ -88,6 +95,10 @@ var UserSouq = /** @class */ (function () {
                         conn.release();
                         // return  single page 
                         return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        err_2 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_2));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -95,10 +106,11 @@ var UserSouq = /** @class */ (function () {
     // INSERT INTO users function
     UserSouq.prototype.create = function (a) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, user;
+            var sql, conn, result, user, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 3, , 4]);
                         sql = 'INSERT INTO users (firstname,lastname,password) VALUES($1, $2, $3) RETURNING *';
                         return [4 /*yield*/, database_1.default.connect()
                             // query data create input
@@ -111,6 +123,10 @@ var UserSouq = /** @class */ (function () {
                         user = result.rows[0];
                         conn.release();
                         return [2 /*return*/, user];
+                    case 3:
+                        err_3 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_3));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -118,10 +134,11 @@ var UserSouq = /** @class */ (function () {
     // UPDATE INTO users function
     UserSouq.prototype.updateUser = function (a) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, user;
+            var sql, conn, result, user, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 3, , 4]);
                         sql = "UPDATE users \n                  SET firstname=$1, lastname=$2,  password=$3 \n                  WHERE id=$4 \n                  RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
@@ -133,6 +150,10 @@ var UserSouq = /** @class */ (function () {
                         user = result.rows[0];
                         conn.release();
                         return [2 /*return*/, user];
+                    case 3:
+                        err_4 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_4));
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -140,10 +161,11 @@ var UserSouq = /** @class */ (function () {
     ////// del user
     UserSouq.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var sql, conn, result, user;
+            var sql, conn, result, user, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 3, , 4]);
                         sql = 'DELETE FROM users WHERE id=($1)';
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
@@ -154,6 +176,10 @@ var UserSouq = /** @class */ (function () {
                         user = result.rows[0];
                         conn.release();
                         return [2 /*return*/, user];
+                    case 3:
+                        err_5 = _a.sent();
+                        throw new Error("Cannot get . Erorr: ".concat(err_5));
+                    case 4: return [2 /*return*/];
                 }
             });
         });

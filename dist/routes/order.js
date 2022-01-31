@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.delorder_products = exports.update = exports.create = exports.show = exports.index = void 0;
+exports.OrderCreate = exports.delorder_products = exports.update = exports.create = exports.show = exports.index = void 0;
 var dotenv = require('dotenv');
 // get config vars
 dotenv.config();
@@ -66,31 +66,25 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
 }); };
 exports.index = index;
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var order_products;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.show(req.params.id)];
-            case 1:
-                order_products = _a.sent();
-                res.json(order_products);
-                return [2 /*return*/];
-        }
+        res.send(400);
+        return [2 /*return*/];
     });
 }); };
 exports.show = show;
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, tk, order_products0, neworder_products;
+    var token, tk, order_products0, neworder_products, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 token = req.headers['authorization'];
                 tk = jwt.verify(token, process.env.TOKEN_SECRET);
                 order_products0 = {
                     id: req.body.id,
                     quantity: req.body.quantity,
-                    order_id : tk.user.id,
-                    product_id : req.body.product_id ,
-                    status: req.body.status,
+                    order_id: tk.user.id,
+                    product_id: req.body.product_id,
                 };
                 console.log(req.body);
                 return [4 /*yield*/, onen.create(order_products0)];
@@ -98,22 +92,27 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 neworder_products = _a.sent();
                 res.json(neworder_products);
                 console.log(neworder_products);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.create = create;
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var order_products0, neworder_products;
+    var order_products0, neworder_products, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 order_products0 = {
                     id: req.body.id,
                     quantity: req.body.quantity,
-                    order_id : req.body.order_id ,
-                    product_id : req.body.product_id ,
-                    status: req.body.status,
+                    order_id: req.body.order_id,
+                    product_id: req.body.product_id,
                 };
                 console.log(req.body);
                 return [4 /*yield*/, onen.updateorder_products(order_products0)];
@@ -121,21 +120,62 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 neworder_products = _a.sent();
                 res.json(neworder_products);
                 console.log(neworder_products);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.update = update;
 var delorder_products = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted;
+    var deleted, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.delete(req.body.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.delete(req.body.id)];
             case 1:
                 deleted = _a.sent();
                 res.json(deleted);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.delorder_products = delorder_products;
+var OrderCreate = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, tk, order_products, neworder_products, error_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                token = req.headers['authorization'];
+                tk = jwt.verify(token, process.env.TOKEN_SECRET);
+                order_products = {
+                    id: req.body.id,
+                    status: req.body.status,
+                    user_id: tk.user.id,
+                };
+                console.log(req.body);
+                return [4 /*yield*/, onen.ordercreate(order_products)];
+            case 1:
+                neworder_products = _a.sent();
+                res.json(neworder_products);
+                console.log(neworder_products);
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.OrderCreate = OrderCreate;

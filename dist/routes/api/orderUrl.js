@@ -11,5 +11,6 @@ var order_products_routes = function (Router) {
     Router.post('/orders', auth_1.default, order_1.create);
     Router.patch('/orders', auth_1.default, order_1.update);
     Router.delete('/orders', auth_1.default, order_1.delorder_products);
+    Router.post('/orders/:id/products', order_1.OrderCreate);
 };
 exports.default = order_products_routes;

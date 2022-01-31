@@ -47,6 +47,29 @@ describe("Souq Model", function () {
         // get all data and check fun
         expect(souq.index).toBeDefined();
     });
+    it('add a order user', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, souq.ordercreate({
+                        id: 1,
+                        user_id: 1,
+                        status: "open"
+                    })];
+                case 1:
+                    result = _a.sent();
+                    // check Equal result 
+                    // after create user
+                    console.log(result);
+                    expect(result).toEqual({
+                        id: 1,
+                        user_id: 1,
+                        status: "open"
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it('add a order', function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
@@ -54,9 +77,8 @@ describe("Souq Model", function () {
                 case 0: return [4 /*yield*/, souq.create({
                         id: 1,
                         quantity: 1,
-                        order_id : '1',
-                        product_id : '1',
-                        status: 'active'
+                        order_id: 1,
+                        product_id: 1
                     })];
                 case 1:
                     result = _a.sent();
@@ -66,9 +88,8 @@ describe("Souq Model", function () {
                     expect(result).toEqual({
                         id: 1,
                         quantity: 1,
-                        order_id : '1',
-                        product_id : '1',
-                        status: 'active'
+                        order_id: 1,
+                        product_id: 1
                     });
                     return [2 /*return*/];
             }
@@ -81,9 +102,8 @@ describe("Souq Model", function () {
                 case 0: return [4 /*yield*/, souq.create({
                         id: 1,
                         quantity: 1,
-                        order_id : '1',
-                        product_id : '1',
-                        status: 'active'
+                        order_id: 1,
+                        product_id: 1
                     })];
                 case 1:
                     result = _a.sent();
@@ -93,9 +113,8 @@ describe("Souq Model", function () {
                     expect(result).toEqual({
                         id: 1,
                         quantity: 1,
-                        order_id : '1',
-                        product_id : '1',
-                        status: 'active'
+                        order_id: 1,
+                        product_id: 1
                     });
                     return [2 /*return*/];
             }
@@ -113,9 +132,8 @@ describe("Souq Model", function () {
                     expect(result).toEqual([{
                             id: 1,
                             quantity: 1,
-                            order_id : '1',
-                            product_id : '1',
-                            status: 'active'
+                            order_id: 1,
+                            product_id: 1
                         }]);
                     return [2 /*return*/];
             }
@@ -133,9 +151,8 @@ describe("Souq Model", function () {
                     expect(result).toEqual({
                         id: 1,
                         quantity: 1,
-                        order_id : '1',
-                        product_id : '1',
-                        status: 'active'
+                        order_id: 1,
+                        product_id: 1
                     });
                     return [2 /*return*/];
             }

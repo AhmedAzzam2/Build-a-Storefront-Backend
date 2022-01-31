@@ -49,36 +49,50 @@ dotenv.config();
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var onen = new user_1.UserSouq();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var Users;
+    var Users, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.index()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.index()];
             case 1:
                 Users = _a.sent();
                 res.json(Users);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.index = index;
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var User;
+    var User, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.show(req.params.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.show(req.params.id)];
             case 1:
                 User = _a.sent();
                 res.json(User);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.show = show;
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var hash, User0, newUser, token;
+    var hash, User0, newUser, token, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD, parseInt(process.env.SALT_ROUNDS));
                 User0 = {
                     id: req.body.id,
@@ -93,16 +107,22 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
                 res.json(token);
                 console.log(token);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.create = create;
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var hash, User0, newUser, token;
+    var hash, User0, newUser, token, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 hash = bcrypt.hashSync(req.body.password + process.env.BCRYPT_PASSWORD, parseInt(process.env.SALT_ROUNDS));
                 User0 = {
                     id: req.body.id,
@@ -117,20 +137,32 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 token = jsonwebtoken_1.default.sign({ user: newUser }, process.env.TOKEN_SECRET);
                 res.json(token);
                 console.log(newUser);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.update = update;
 var delUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted;
+    var deleted, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.delete(req.body.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.delete(req.body.id)];
             case 1:
                 deleted = _a.sent();
                 res.json(deleted);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_5 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

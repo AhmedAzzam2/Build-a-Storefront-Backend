@@ -24,7 +24,7 @@ app.use(cors());
 
 
 
-// let bk =new productSouq()
+// const bk =new productSouq()
 
 // client.connect().then(
 //     (db)=>{

@@ -18,6 +18,8 @@ export const getUser = (req: Request, res: Response) => {
 
 // created function for check token access 
 const authenticateToken = (req: Request, res: Response, next: NextFunction) => { 
+    try {
+        
         // get token from hader
         const token = req.headers['authorization']
         // const token = authHeader && authHeader.split(' ')[1]
@@ -25,6 +27,9 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
         const tk = jwt.verify(token, token_secret)
         console.log(tk); console.log('zzzzzzzzz');
         next();
+    } catch (error) {
+        res.send(400)
+    }
 }
 
 export default authenticateToken

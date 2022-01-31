@@ -60,7 +60,7 @@ describe("Souq Model", function () {
                 case 1:
                     result = _a.sent();
                     // check Equal result
-                    console.log(result);
+                    console.log(result.price);
                     expect(result).toEqual({
                         'id': 1,
                         'name': 'Learn more About that',

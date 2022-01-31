@@ -12,7 +12,7 @@ const {
   ENV,
 } = process.env
 
-// let client
+// const client
 // console.log(ENV)
 
 // if(ENV === 'test') {
@@ -35,7 +35,7 @@ const {
 
 // export default client
 
-let client = new Pool({
+const client = new Pool({
   host: POSTGRES_HOST,
   database: ENV === 'dev' ? POSTGRES_DB : POSTGRES_TEST_DB,
   user: POSTGRES_USER,

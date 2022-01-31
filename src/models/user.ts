@@ -11,45 +11,58 @@ export type User = {
 export class UserSouq {
   // function index for get all users
   async index(): Promise<User[]> {
-    // connect database
-    const conn = await Client.connect()
-    const sql = 'SELECT * FROM users'
-    // add sql in query
-    const result = await conn.query(sql)
-    // conn database release
-    conn.release()
-    // return all users
-    return result.rows
+    try {
+      // connect database
+      const conn = await Client.connect()
+      const sql = 'SELECT * FROM users'
+      // add sql in query
+      const result = await conn.query(sql)
+      // conn database release
+      conn.release()
+      // return all users
+      return result.rows
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
   // make function for show single user
   async show(id: string): Promise<User> {
-    // sql users
-    const sql = 'SELECT * FROM users WHERE id=($1)'
-    // connect database
-    const conn = await Client.connect()
-    // query sql
-    const result = await conn.query(sql, [id])
-    conn.release()
-    // return  single page 
-    return result.rows[0]
+    try {
+      // sql users
+      const sql = 'SELECT * FROM users WHERE id=($1)'
+      // connect database
+      const conn = await Client.connect()
+      // query sql
+      const result = await conn.query(sql, [id])
+      conn.release()
+      // return  single page 
+      return result.rows[0]
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
-// INSERT INTO users function
+  // INSERT INTO users function
   async create(a: User): Promise<User> {
-    const sql = 'INSERT INTO users (firstname,lastname,password) VALUES($1, $2, $3) RETURNING *'
-    // connect database
-    const conn = await Client.connect()
-    // query data create input
-    const result = await conn.query(sql, [a.firstname, a.lastname, a.password])
-    const user = result.rows[0]
+    try {
+      const sql = 'INSERT INTO users (firstname,lastname,password) VALUES($1, $2, $3) RETURNING *'
+      // connect database
+      const conn = await Client.connect()
+      // query data create input
+      const result = await conn.query(sql, [a.firstname, a.lastname, a.password])
+      const user = result.rows[0]
 
-    conn.release()
+      conn.release()
 
-    return user
+      return user
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
 
 
-// UPDATE INTO users function
+  // UPDATE INTO users function
   async updateUser(a: User): Promise<User> {
+    try {
       const sql = `UPDATE users 
                   SET firstname=$1, lastname=$2,  password=$3 
                   WHERE id=$4 
@@ -66,9 +79,13 @@ export class UserSouq {
       conn.release()
 
       return user
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
-////// del user
+  ////// del user
   async delete(id: string): Promise<User> {
+    try {
       const sql = 'DELETE FROM users WHERE id=($1)'
       // connect database
       const conn = await Client.connect()
@@ -79,6 +96,9 @@ export class UserSouq {
 
       conn.release()
       return user
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
 }
 

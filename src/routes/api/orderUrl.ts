@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { index,show,create,update,delorder_products, Ordercreate } from '../order';
+import { index,show,create,update,delorder_products, OrderCreate } from '../order';
 import authenticateToken from '../auth';
 
 const order_products_routes = (Router: express.Router) => {
@@ -8,7 +8,7 @@ const order_products_routes = (Router: express.Router) => {
     Router.post('/orders', authenticateToken, create);
     Router.patch('/orders', authenticateToken, update);
     Router.delete('/orders', authenticateToken, delorder_products);
-    Router.post('/orders/:id/products', Ordercreate)
+    Router.post('/orders/:id/products', OrderCreate)
 };
 
 export default order_products_routes;

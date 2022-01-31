@@ -42,40 +42,55 @@ var product_1 = require("../models/product");
 var onen = new product_1.productSouq();
 // create fun route for home api products 
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var products;
+    var products, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.index()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.index()];
             case 1:
                 products = _a.sent();
                 // result all products  as json
                 res.json(products);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.index = index;
 // show single page product api
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var product;
+    var product, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.show(req.params.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.show(req.params.id)];
             case 1:
                 product = _a.sent();
                 // result info as json
                 res.json(product);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.show = show;
 // makeed created product by form or api
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var productNew, newproduct;
+    var productNew, newproduct, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 productNew = {
                     name: req.body.name,
                     price: req.body.price,
@@ -88,17 +103,23 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 res.json(newproduct);
                 // check newproduct after send to database 
                 console.log(newproduct);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.create = create;
 // update product
 var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var productNew, newproduct;
+    var productNew, newproduct, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 productNew = {
                     id: req.body.id,
                     name: req.body.name,
@@ -112,24 +133,36 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 res.json(newproduct);
                 // check newproduct after send to database 
                 console.log(newproduct);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.update = update;
 // fun delete product by id
 var delproduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted;
+    var deleted, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, onen.delete(req.body.id)
-                // send data as json
-            ];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, onen.delete(req.body.id)
+                    // send data as json
+                ];
             case 1:
                 deleted = _a.sent();
                 // send data as json
                 res.json(deleted);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_5 = _a.sent();
+                res.send(400);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

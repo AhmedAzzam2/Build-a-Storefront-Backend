@@ -16,8 +16,8 @@ app.use(express_1.default.json());
 // Cors for cross origin allowance
 app.use((0, cors_1.default)());
 // Initialize the main product folder
-app.use(express_1.default.static('website'));
-// let bk =new productSouq()
+// app.use(express.static('website'));
+// const bk =new productSouq()
 // client.connect().then(
 //     (db)=>{
 //         return db.query('SELECT from products ', (err, res) => {
