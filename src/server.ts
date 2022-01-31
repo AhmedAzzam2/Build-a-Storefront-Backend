@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 
 // Initialize the main product folder
-app.use(express.static('website'));
+// app.use(express.static('website'));
 
 
 
