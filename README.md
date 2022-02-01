@@ -83,36 +83,23 @@ start
     - Returns a crud work on api server
 - Sample: `curl http://127.0.0.1:3000/`
 
-### GET /users
+### GET POST /users
 - General:
     - Returns all users on api server
 - Sample: `curl http://127.0.0.1:3000/users`
-### post /users
-- General:
-    - add user on api server
-- Sample: `curl http://127.0.0.1:3000/users`
-### GET /products
+
+### GET POST /products
 - General:
     - Returns all products on api server
 - Sample: `curl http://127.0.0.1:3000/products`
-### post /products
-- General:
-    - add user on api server
-- Sample: `curl http://127.0.0.1:3000/products`
-### GET /orders
+
+### GET POST /orders
 - General:
     - Returns all orders on api server
 - Sample: `curl http://127.0.0.1:3000/orders`
-### post /orders
-- General:
-    - add user on api server
-- Sample: `curl http://127.0.0.1:3000/orders`
-### post /orders
-- General:
-    - add user on api server
-- Sample: `curl http://127.0.0.1:3000/orders`
+
  
-### GET //orders/:id/products
+### GET /orders/:id/products
 - General: 
     - add user on api server
 - Sample: `curl http://127.0.0.1:3000/orders/:id/products`
