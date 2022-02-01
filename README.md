@@ -71,7 +71,7 @@ npm run reset
 ```
 ## test from window
 ```
-nom run test:window 
+npm run test:window 
 ```
 
 
