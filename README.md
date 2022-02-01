@@ -9,10 +9,26 @@ product requires having node installed https://nodejs.org/en/download/
 run ```npm install``` to package installation instructions
 
 ports the backend and database are running on ``` 5432 ```
+ports the backend and express JS are running on ``` 3000 ```
 
+Setup Database
 
+user postgres, PASSWORD 'a'
+
+create DATABASE p1
+
+create test DATABASE t1
+
+```
+used Postgres for the database
+used Express for server
+dotenv environment variables
+db-migrate for migrations
+JWTs
+jasmine for testing
+```
 ## db info .env
-'''
+```
 POSTGRES_HOST=127.0.0.1
 
 POSTGRES_DB=p1
@@ -30,7 +46,13 @@ SALT_ROUNDS=10
 ENV=dev
 TOKEN_SECRET=14793feeaae5a630f476bc85b46e75e6aaf9215f96ada913b86398ec2449abc538ce64a8424eba0fbf6caa948e28f3ca3ac22e03087b5977f2d78cd12bb7c032
 
-'''
+```
+install run
+
+## db-migrate up
+``` migration:run ```
+
+
 ## Testing
 Testing is done using jasmine
 To run the tests, run 
