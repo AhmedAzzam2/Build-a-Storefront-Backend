@@ -52,16 +52,16 @@ install run
 ## db-migrate up
 ``` migration:run ```
  
-start
+## start
 ```
-## npm run start
+npm run start
 ```
 ## Testing
 Testing is done using jasmine
 To run the tests, run 
 setup and connect to the database
 
-migration
+## migration
 '''
 npm run migration:run
 ```
@@ -71,8 +71,8 @@ npm run reset
 ```
 ## test from window
 ```
-npm run test:window
-''' 
+nom run test:window 
+```
 
 
 
