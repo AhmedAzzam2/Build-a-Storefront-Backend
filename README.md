@@ -69,15 +69,12 @@ npm run migration:run
 ```
 npm run reset
 ```
-## test window
+## test from window
 ```
 npm run test:window
 ''' 
 
-## test window
-```
-npm run test:window
-''' 
+
 
 ## API Reference
  
