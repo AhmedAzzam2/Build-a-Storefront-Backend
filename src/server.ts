@@ -24,16 +24,16 @@ app.use(cors());
 
 
 
-// const bk =new productSouq()
+const bk =new productSouq()
 
-// client.connect().then(
-//     (db)=>{
-//         return db.query('SELECT from products ', (err, res) => {
-//           console.log(err, res.rows) 
-//         })
+client.connect().then(
+    (db)=>{
+        return db.query('SELECT from products ', (err, res) => {
+          console.log(err, res.rows) 
+        })
         
-//     }
-// )
+    }
+)
 
 
 

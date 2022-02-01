@@ -81,14 +81,14 @@ describe("Souq Model", () => {
     });
   });
 
-  it('delete user', async () => {
-    // delete by id
-    souq.delete("1");
-    // wait function  delete
-    const result = await souq.index()
-    // check Equal result 
-    // after create user
-    expect(result).toEqual([]);
-  });
+  // it('delete user', async () => {
+  //   // delete by id
+  //   souq.delete("1");
+  //   // wait function  delete
+  //   const result = await souq.index()
+  //   // check Equal result 
+  //   // after create user
+  //   expect(result).toEqual([]);
+  // });
 });
 // describe eend

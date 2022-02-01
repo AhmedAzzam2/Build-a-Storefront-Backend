@@ -146,7 +146,7 @@ var order_productsSouq = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        sql = "UPDATE order_products  \n  SET quantity=$1, order_id =$2, product_id =$3\n  WHERE id=$4 \n  RETURNING *";
+                        sql = "UPDATE order_products SET quantity=$1, order_id =$2, product_id =$3 WHERE id=$4 RETURNING *";
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();

@@ -14,11 +14,11 @@ describe("Souq Model", () => {
   });
 
   
-  it('add a order user', async () => {
+  it('add a user for order', async () => {
     // create order
     const result = await souq.ordercreate({
       id: 1,
-      user_id: 1,
+      user_id: "1",
       status: "open"
     });
     // check Equal result 
@@ -27,7 +27,7 @@ describe("Souq Model", () => {
 
     expect(result).toEqual({
       id: 1,
-      user_id: 1,
+      user_id: "1",
       status: "open"
     });
   });
@@ -38,8 +38,8 @@ describe("Souq Model", () => {
     const result = await souq.create({
       id: 1,
       quantity: 1,
-      order_id: 1,
-      product_id: 1
+      order_id: '1',
+      product_id: '1'
     });
     // check Equal result 
     // after create user
@@ -48,17 +48,17 @@ describe("Souq Model", () => {
     expect(result).toEqual({
       id: 1,
       quantity: 1,
-      order_id: 1,
-      product_id: 1
+      order_id: '1',
+      product_id: '1'
     });
   });
   it('update a order', async () => {
     // up order
-    const result = await souq.create({
+    const result = await souq.updateorder_products({
       id: 1,
       quantity: 1,
-      order_id: 1,
-      product_id: 1
+      order_id: '1',
+      product_id: '1'
     });
     // check Equal result 
     // after uo user
@@ -67,8 +67,8 @@ describe("Souq Model", () => {
     expect(result).toEqual({
       id: 1,
       quantity: 1,
-      order_id: 1,
-      product_id: 1
+      order_id: '1',
+      product_id: '1'
     });
   });
 
@@ -78,11 +78,14 @@ describe("Souq Model", () => {
     const result = await souq.index();
     // check Equal result 
     // after create user
-    expect(result).toEqual([{
+    console.log(result);
+    expect(result).toEqual([{ 
       id: 1,
+      name: 'Learn more About that',
+      price: 10,
       quantity: 1,
-      order_id: 1,
-      product_id: 1
+      order_id: '1',
+      product_id: '1'
     }]);
   });
 
@@ -91,11 +94,13 @@ describe("Souq Model", () => {
     const result = await souq.show("1");
     // check Equal result 
     // after create user
+    console.log(result);
+    
     expect(result).toEqual({
       id: 1,
       quantity: 1,
-      order_id: 1,
-      product_id: 1
+      order_id: '1',
+      product_id: '1'
     });
   });
 

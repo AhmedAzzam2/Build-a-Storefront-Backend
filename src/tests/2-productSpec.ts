@@ -70,12 +70,12 @@ describe("Souq Model", () => {
   });
 
   
-  it('delete product', async () => {
-    souq.delete("1");
-    const result = await souq.index()
+  // it('delete product', async () => {
+  //   souq.delete("1");
+  //   const result = await souq.index()
 
-    // check Equal result null 
-    expect(result).toEqual([]);
-  });
+  //   // check Equal result null 
+  //   expect(result).toEqual([]);
+  // });
 });
 // describe end

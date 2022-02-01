@@ -29,40 +29,40 @@ export const show = async (req: Request, res: Response) => {
 }
 
 export const create = async (req: Request, res: Response) => {
-try {
-    const token = req.headers['authorization']
-    const tk = jwt.verify(token, process.env.TOKEN_SECRET!)
+    try {
+        const token = req.headers['authorization']
+        const tk = jwt.verify(token, process.env.TOKEN_SECRET!)
 
-    const order_products0: order_products = {
-        id: req.body.id,
-        quantity: req.body.quantity,
-        order_id: tk.user.id,
-        product_id: req.body.product_id,
-    };
-    console.log(req.body);
+        const order_products0: order_products = {
+            id: req.body.id,
+            quantity: req.body.quantity,
+            order_id: tk.user.id,
+            product_id: req.body.product_id,
+        };
+        console.log(req.body);
 
-    const neworder_products = await onen.create(order_products0);
-    res.json(neworder_products)
-    console.log(neworder_products)
-} catch (error) {
-    res.send(400)
-}
+        const neworder_products = await onen.create(order_products0);
+        res.json(neworder_products)
+        console.log(neworder_products)
+    } catch (error) {
+        res.send(400)
+    }
 };
 
 export const update = async (req: Request, res: Response) => {
     try {
-        
-    const order_products0: order_products = {
-        id: req.body.id,
-        quantity: req.body.quantity,
-        order_id: req.body.order_id,
-        product_id: req.body.product_id,
-    };
-    console.log(req.body);
 
-    const neworder_products = await onen.updateorder_products(order_products0);
-    res.json(neworder_products)
-    console.log(neworder_products)
+        const order_products0: order_products = {
+            id: req.body.id,
+            quantity: req.body.quantity,
+            order_id: req.body.order_id,
+            product_id: req.body.product_id,
+        };
+        console.log(req.body);
+
+        const neworder_products = await onen.updateorder_products(order_products0);
+        res.json(neworder_products)
+        console.log(neworder_products)
     } catch (error) {
         res.send(400)
     }
@@ -71,9 +71,9 @@ export const update = async (req: Request, res: Response) => {
 
 export const delorder_products = async (req: Request, res: Response) => {
     try {
-        
-    const deleted = await onen.delete(req.body.id)
-    res.json(deleted)
+
+        const deleted = await onen.delete(req.body.id)
+        res.json(deleted)
     } catch (error) {
         res.send(400)
     }

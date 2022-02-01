@@ -6,17 +6,26 @@
 
 product requires having node installed https://nodejs.org/en/download/
 
-run ```npm install``` to install the dependencies
+run ```npm install``` to package installation instructions
+ports the backend and database are running on '''5432 '''
+
 
 ## db info .env
 '''
 POSTGRES_HOST=127.0.0.1
+
 POSTGRES_DB=p1
+
 POSTGRES_TEST_DB=t1
+
 POSTGRES_USER=postgres
+
 POSTGRES_PASSWORD=a
+
 BCRYPT_PASSWORD=mypassword
+
 SALT_ROUNDS=10
+
 ENV=dev
 TOKEN_SECRET=14793feeaae5a630f476bc85b46e75e6aaf9215f96ada913b86398ec2449abc538ce64a8424eba0fbf6caa948e28f3ca3ac22e03087b5977f2d78cd12bb7c032
 
@@ -24,28 +33,26 @@ TOKEN_SECRET=14793feeaae5a630f476bc85b46e75e6aaf9215f96ada913b86398ec2449abc538c
 ## Testing
 Testing is done using jasmine
 To run the tests, run 
+setup and connect to the database
 
-start
-```
-## npm run start
-```
 migration:run
 ```
-## db-migrate --env test reset
+## reset
 ```
 npm run reset
 ```
 ## test
 ```
-ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test
-
-## set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset
+npm run test:window
 ''' 
-npx run server test:window: 
-'''
+
 ## API Reference
  
  
+start
+```
+## npm run start
+```
 
 ### Endpoints 
 ### GET /

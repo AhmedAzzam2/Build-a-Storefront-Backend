@@ -138,25 +138,14 @@ describe("Souq Model", function () {
             }
         });
     }); });
-    it('delete user', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    // delete by id
-                    souq.delete("1");
-                    return [4 /*yield*/, souq.index()
-                        // check Equal result 
-                        // after create user
-                    ];
-                case 1:
-                    result = _a.sent();
-                    // check Equal result 
-                    // after create user
-                    expect(result).toEqual([]);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
+    // it('delete user', async () => {
+    //   // delete by id
+    //   souq.delete("1");
+    //   // wait function  delete
+    //   const result = await souq.index()
+    //   // check Equal result 
+    //   // after create user
+    //   expect(result).toEqual([]);
+    // });
 });
 // describe eend

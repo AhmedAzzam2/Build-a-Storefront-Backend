@@ -4,16 +4,20 @@ import Client from '../database'
 export type order_products = {
   id: number;
   quantity: number;
-  order_id: number;
-  product_id: number;
+  order_id: string;
+  product_id: string;
+
+  
+  name?: string;
+  price?: number;
 }
 export type order = {
   id: number;
   status: string;
-  user_id: number;
+  user_id?: string;
 }
 
- 
+
 // make class models 
 export class order_productsSouq {
   // function get all  order for order_id 
@@ -77,65 +81,62 @@ export class order_productsSouq {
 
 
   async updateorder_products(a: order_products): Promise<order_products> {
-try {
-  
-  const sql = `UPDATE order_products  
-  SET quantity=$1, order_id =$2, product_id =$3
-  WHERE id=$4 
-  RETURNING *`
+    try {
 
-// conn database
-const conn = await Client.connect()
+      const sql = `UPDATE order_products SET quantity=$1, order_id =$2, product_id =$3 WHERE id=$4 RETURNING *`
 
-const result = await conn
-.query(sql, [a.quantity, a.order_id, a.product_id, a.id])
+      // conn database
+      const conn = await Client.connect()
 
-const order = result.rows[0]
+      const result = await conn
+        .query(sql, [a.quantity, a.order_id, a.product_id, a.id])
 
-conn.release()
+      const order = result.rows[0]
 
-return order
-} catch (err) {
-  throw new Error(`Cannot get . Erorr: ${err}`)
-}
+      conn.release()
+
+      return order
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
 
   async delete(id: string): Promise<order_products> {
-    try { 
-    const sql = 'DELETE FROM order_products  WHERE id=($1)'
-    // conn database
-    const conn = await Client.connect()
+    try {
+      const sql = 'DELETE FROM order_products  WHERE id=($1)'
+      // conn database
+      const conn = await Client.connect()
 
-    const result = await conn.query(sql, [id])
+      const result = await conn.query(sql, [id])
 
-    const order = result.rows[0]
+      const order = result.rows[0]
 
-    conn.release()
+      conn.release()
 
-    return order
-  } catch (err) {
-    throw new Error(`Cannot get . Erorr: ${err}`)
-  }
+      return order
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
 
   // make create fun INSERT INTO order_products 
   async ordercreate(a: order): Promise<order> {
-    try { 
-    const sql = 'INSERT INTO orders  ( status , user_id  ) VALUES($1, $2 ) RETURNING *'
-    // conn database
-    const conn = await Client.connect()
-    // query data
-    const result = await conn
-      .query(sql, [a.status, a.user_id])
+    try {
+      const sql = 'INSERT INTO orders  ( status , user_id  ) VALUES($1, $2 ) RETURNING *'
+      // conn database
+      const conn = await Client.connect()
+      // query data
+      const result = await conn
+        .query(sql, [a.status, a.user_id])
 
-    const order = result.rows[0]
-    // conn database release
-    conn.release()
-    // return data order
-    return order
-  } catch (err) {
-    throw new Error(`Cannot get . Erorr: ${err}`)
-  }
+      const order = result.rows[0]
+      // conn database release
+      conn.release()
+      // return data order
+      return order
+    } catch (err) {
+      throw new Error(`Cannot get . Erorr: ${err}`)
+    }
   }
 
 }

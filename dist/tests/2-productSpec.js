@@ -126,22 +126,11 @@ describe("Souq Model", function () {
             }
         });
     }); });
-    it('delete product', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    souq.delete("1");
-                    return [4 /*yield*/, souq.index()
-                        // check Equal result null 
-                    ];
-                case 1:
-                    result = _a.sent();
-                    // check Equal result null 
-                    expect(result).toEqual([]);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
+    // it('delete product', async () => {
+    //   souq.delete("1");
+    //   const result = await souq.index()
+    //   // check Equal result null 
+    //   expect(result).toEqual([]);
+    // });
 });
 // describe end
