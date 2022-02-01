@@ -7,7 +7,8 @@
 product requires having node installed https://nodejs.org/en/download/
 
 run ```npm install``` to package installation instructions
-ports the backend and database are running on '''5432 '''
+
+ports the backend and database are running on ``` 5432 ```
 
 
 ## db info .env
