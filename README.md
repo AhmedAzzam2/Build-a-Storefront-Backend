@@ -49,7 +49,7 @@ TOKEN_SECRET=14793feeaae5a630f476bc85b46e75e6aaf9215f96ada913b86398ec2449abc538c
 install run
 
 ## migration
-``` migration:run ```   
+```npm run migration:run ```   
  
 ## start
    

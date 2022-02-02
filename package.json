@@ -6,9 +6,9 @@
   "scripts": {
     "start": "nodemon src/server.ts",
     "migration:run": "db-migrate up",
-    "format": "prettier --write src/**/*.ts",
-    "test": "set ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test",
-    "test:window": "set ENV=test && db-migrate --env test up && jasmine  ",
+    "format": "prettier --write src/**/*.ts", 
+    "test": "npx tsc && db-migrate --env test reset && ENV=test && db-migrate --env test up && jasmine",
+    "test:window": "npx tsc && db-migrate --env test reset && set ENV=test && db-migrate --env test up && jasmine",
     "reset": "db-migrate --env test reset",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix",
